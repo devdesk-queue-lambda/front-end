@@ -1,4 +1,4 @@
-import { Card, ButtonSection } from '../styles/Card'
+import { Card, ButtonSection, TypeDisp, TicketDesc, Description } from '../styles/Card'
 import { InfoButton, KillButton } from "../styles/Buttons";
 import {useDispatch,useSelector} from 'react-redux'
 
@@ -8,7 +8,7 @@ function Task(props) {
 
     const dispatch=useDispatch()
 
-    const id=useSelector(state=>state.id)
+    const id=Number(useSelector(state=>state._id))
     const authType=useSelector(state=>state.authType)
 
     const edit=e=>{
@@ -23,18 +23,24 @@ function Task(props) {
         console.log(props)
     }
 
+    const viewOne=e=>{
+        console.log(e);
+    }
+
     return (
         <Card>
-            <div className="section">
-                Topic:{props.topic}
-            </div>
-            <div className="desc">
-                Description:<br/>
-                {props.description}
-            </div>
-            {(props.owner===id || authType==='helper' || authType==='moderator') &&     
-                <input type="checkbox" name="done" value={props.done} onChange={finish}/>
-            }
+            <TicketDesc onClick={viewOne}>
+                <TypeDisp>
+                    Topic: <span>{props.type}</span>
+                </TypeDisp>
+                <Description>
+                    <span>Description:</span><br/>
+                    {props.description}
+                </Description>
+                {(props.owner===id || authType==='helper' || authType==='moderator') &&     
+                    <label htmlFor="done">Done: <input type="checkbox" name="done" value={props.done} onChange={finish}/></label>
+                }
+            </TicketDesc>
             <ButtonSection>
                 {props.owner===id && 
                     <InfoButton onClick={edit}>
