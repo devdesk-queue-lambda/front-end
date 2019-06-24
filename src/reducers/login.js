@@ -5,7 +5,7 @@ import {
 } from '../actions';
 
 const initialState = {
-  error: "",
+  error: null,
   username: '',
   authorizationType: '',
   isLoggingIn: false,
@@ -17,13 +17,13 @@ export const login = (state = initialState, action) => {
     case LOGIN_START:
       return {
         ...state,
-        error: "",
+        error: null,
         isLoggingIn: true
       }
     case LOGIN_SUCCESS:
       return {
         ...state,
-        error: "",
+        error: null,
         isLoggingIn: false,
         isLoggedIn: true
       }

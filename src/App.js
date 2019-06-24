@@ -1,7 +1,15 @@
 import React from 'react';
-import HelpList from './components/HelpList'
 import {ThemeProvider} from 'styled-components'
+
+import { Route } from 'react-router-dom';
 import {Wrapper} from './styles/App'
+
+import Navigation from './components/Navigation';
+import Home from './components/Home';
+import Register from './components/Register';
+import UserHome from './components/UserHome';
+// import Ticket from './components/Ticket';
+
 
 const theme={
   bgAccent:'#2f2c4b',
@@ -16,10 +24,14 @@ const theme={
 }
 
 function App() {
+  const id=0
   return (
     <ThemeProvider theme={theme}>
       <Wrapper>
-        <HelpList/>
+        <Route exact path="/" component={Home} />
+        <Route exact path="/register" component={Register} />
+        <Route path="/user" component={UserHome} />
+        {/* <Route path={`/ticket/${id}`} component={Ticket} />  */}
       </Wrapper>
     </ThemeProvider>
   );

@@ -1,4 +1,6 @@
 import React from 'react';
+import HelpList from './HelpList'
+
 
 class Home extends React.Component {
   state = {
@@ -27,7 +29,7 @@ class Home extends React.Component {
             )
           :
             (
-              <p>stuff to display if loggedin</p>
+                <HelpList/>
             )
         }
       </div>

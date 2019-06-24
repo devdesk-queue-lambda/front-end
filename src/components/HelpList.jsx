@@ -6,12 +6,12 @@ import {mods} from '../actions'
 import Navigation from './Navigation'
 
 function HelpList() {
-    
-    const tickets=useSelector(state=>state.tickets)
-    const viewed=useSelector(state=>state.viewed)
-    const id=Number(useSelector(state=>state._id))
-    const auth=useSelector(state=>state.authType)
-    const helpers=useSelector(state=>state.mods)
+
+    const tickets=useSelector(state=>state.tickets.tickets)
+    const viewed=useSelector(state=>state.tickets.viewed)
+    const id=Number(useSelector(state=>state.login._id))
+    const auth=useSelector(state=>state.login.authType)
+    const helpers=useSelector(state=>state.tickets.mods)
     const [sort,setSort]=useState('standard')
 
     const dispatch=useDispatch();
@@ -46,7 +46,7 @@ function HelpList() {
         <section>
             <Header>
                 {auth==='admin' && <Navigation/>}
-                {auth!=='admin' && <span>'DevDesk'</span>}
+                {auth!=='admin' && <span>DevDesk</span>}
                 <select onChange={e=>{
                     setSort(e.target.value)}
                 }>

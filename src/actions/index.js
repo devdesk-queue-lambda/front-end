@@ -9,20 +9,32 @@ export const GET_CARDS='GET_CARDS'
 export const FETCHING="FETCHING"
 export const ASSIGN="ASSIGN"
 //logins
-export const LOGIN='LOGIN'
-export const SUCCESS='SUCCESS'
 export const NEW_USER='NEW_USER'
 export const LOGOUT='LOGOUT'
+export const LOGIN_START = "LOGIN_START";
+export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
+export const LOGIN_FAIL = "LOGIN_FAIL";
+const baseURL = "someurl";
+
 export const ERROR='ERROR'
 export const FLIP_TICKET='FLIP_TICKET'
 //moderators
 export const LIST_MODS='LIST_MODS'
 export const ALTER_PRIVLIDGE='ALTER_PRIVLIDGE'
 
-
-export const login=e=>dispatch=>{
-    dispatch({type:LOGIN})
-}
+export const login = credentials => dispatch => {
+    dispatch({ type: LOGIN_START });
+    return axios.post(`${baseURL}/api/login`, credentials)
+      .then(res => {
+        localStorage.setItem("token", res.data.payload);
+        dispatch({
+          type: LOGIN_SUCCESS,
+          payload: res.data.payload
+        });
+        return true;
+      })
+      .catch(err => console.log('err',err));
+  }
 
 export const removeTicket=e=>dispatch=>{
     dispatch({type:FETCHING})

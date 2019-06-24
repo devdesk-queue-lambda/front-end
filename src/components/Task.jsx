@@ -9,9 +9,9 @@ function Task(props) {
 
     const dispatch=useDispatch()
 
-    const id=Number(useSelector(state=>state._id))
-    const authType=useSelector(state=>state.authType)
-    const mods=useSelector(state=>state.mods)
+    const id=Number(useSelector(state=>state.login._id))
+    const authType=useSelector(state=>state.login.authType)
+    const mods=useSelector(state=>state.tickets.mods)
     const assigned=mods.filter(mod=>mod._id===props.assigned)[0]
 
     const edit=e=>{
