@@ -3,9 +3,20 @@ import * as v from './vars'
 
 export const List=styled.section`
     @import url('https://fonts.googleapis.com/css?family=Lato&display=swap');
-    max-width: 1000px;
+    display:flex;
+    flex-direction:column;
     margin:auto;
+    ${v.FONT_STACK};
     padding:3rem .5rem;
+    ${v.TABLET}{
+        flex-direction:row;
+        flex-wrap:wrap;
+        justify-content:center;
+    }
+    ${v.DESKTOP}{
+        width:100%;
+        justify-content:space-evenly;
+    }
 `
 export const Header=styled.header`
     position:fixed;

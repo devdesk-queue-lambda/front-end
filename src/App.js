@@ -20,7 +20,8 @@ const theme={
   infoAccent:'white',
   pBorderColor:'black',
   pBgColor:'#f0f4f7',
-  accBorderColor:'transparent'
+  accBorderColor:'transparent',
+  alertBgAccent:'#3bb5e6'
 }
 
 function App() {
