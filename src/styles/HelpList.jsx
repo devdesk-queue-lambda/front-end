@@ -15,12 +15,14 @@ export const Header=styled.header`
     color:${props=>props.theme.accent};
     text-align:left;
     padding-left:1rem;
+    display:flex;
+    justify-content:space-between;
     ${v.FONT_STACK};
     select{
         position:relative;
         width:45%;
         height:2rem;
         margin:.5rem;
-        right:-20%;
+        right:1rem;
     }
 `

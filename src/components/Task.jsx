@@ -41,6 +41,13 @@ function Task(props) {
         console.log(e.target.value);
     }
 
+    const removeAssignment=e=>{
+        dispatch(assign({
+            ...props,
+            assigned:null
+        }))
+    }
+
     return (
         <Card>
             <TicketDesc onClick={viewOne}>
@@ -66,7 +73,11 @@ function Task(props) {
                     <InfoButton onClick={assignSelf}>
                         Assign Self
                     </InfoButton>
-                }
+                }{(authType==='helper' && props.assigned===id)&& 
+                <InfoButton onClick={removeAssignment}>
+                    Remove Assignment
+                </InfoButton>
+            }
                 {(authType==='mod' || authType==='admin') && 
                     <select onChange={assignOther}>
                         <option value="">Assign Helper</option>

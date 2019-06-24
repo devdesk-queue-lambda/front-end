@@ -3,6 +3,7 @@ import {useSelector,useDispatch} from 'react-redux'
 import Ticket from './Task'
 import {List,Header} from '../styles/HelpList'
 import {mods} from '../actions'
+import Navigation from './Navigation'
 
 function HelpList() {
     
@@ -44,7 +45,8 @@ function HelpList() {
     return (
         <section>
             <Header>
-                DevDesk
+                {auth==='admin' && <Navigation/>}
+                {auth!=='admin' && <span>'DevDesk'</span>}
                 <select onChange={e=>{
                     setSort(e.target.value)}
                 }>

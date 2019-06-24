@@ -39,6 +39,11 @@ export const assign=e=>dispatch=>{
     dispatch({type:ASSIGN,payload:e})
 }
 
+export const deAssign=e=>dispatch=>{
+    dispatch({type:FETCHING})
+    dispatch({type:ASSIGN,payload:e})
+}
+
 export const mods=e=>{
     return {type:LIST_MODS,payload:data.users.filter(user=>user.authType!=='user')}
 }

@@ -11,7 +11,8 @@ const theme={
   infoBgAccent:'#1a61af',
   infoAccent:'white',
   pBorderColor:'black',
-  pBgColor:'#f0f4f7'
+  pBgColor:'#f0f4f7',
+  accBorderColor:'transparent'
 }
 
 function App() {
