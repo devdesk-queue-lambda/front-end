@@ -6,7 +6,6 @@ import {
 
 const initialState = {
   error: "",
-  username: '',
   isSubmittingTicket: false
 }
 

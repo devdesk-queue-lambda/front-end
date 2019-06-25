@@ -19,8 +19,7 @@ function App() {
       <Route exact path="/register" component={Register} />
       <PrivateRoute path="/user" component={UserHome} />
       <PrivateRoute path="/create-ticket/" component={NewTicket} /> 
-      <PrivateRoute path={`/ticket/${id}`} component={Ticket} />
-      {/* ticket will have an edit state within it */}
+      <PrivateRoute path={`/ticket/:id`} component={Ticket} />
     </div>
   );
 }

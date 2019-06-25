@@ -1,10 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import Lambda_Logo from '../imgs/Lambda_Logo.png';
 
 const Navigation = props => {
   return (
     <nav>
-      <h3>DevDesk Queue</h3>
+      <h3><img src={Lambda_Logo} alt="Lambda Logo Mark" height="29" />DevDesk Queue</h3>
       <ul>
         {localStorage.getItem('token') ?
           (

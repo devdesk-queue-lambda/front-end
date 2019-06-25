@@ -26,7 +26,6 @@ export const login = (state = initialState, action) => {
         error: false,
         errorInfo: {},
         userID: action.payload.id,
-        authType: action.payload.authType,
         isLoggingIn: false
       }
     case LOGIN_FAIL:

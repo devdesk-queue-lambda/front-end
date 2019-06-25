@@ -5,9 +5,9 @@ import {
 } from '../actions';
 
 const initialState = {
-  error: "",
-  username: '',
-  authorizationType: '',
+  error: false,
+  errorInfo: {},
+  userID: "",
   isRegistering: false
 }
 
@@ -16,19 +16,21 @@ export const register = (state = initialState, action) => {
     case REGISTER_START:
       return {
         ...state,
-        error: "",
+        error: false,
         isRegistering: true
       }
     case REGISTER_SUCCESS:
       return {
         ...state,
-        error: "",
+        error: false,
+        userID: action.payload.id,
         isRegistering: false
       }
     case REGISTER_FAIL:
       return {
         ...state,
-        error: 'Could not login',
+        error: true,
+        errorInfo: action.payload,
         isRegistering: false,
       }
     default:
