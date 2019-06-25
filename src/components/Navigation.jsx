@@ -2,7 +2,7 @@ import React,{useState} from 'react'
 import {Navigate} from '../styles/navigation'
 import {Header} from '../styles/Header'
 import cn from '../helpers/ClassReducer'
-import {FaBars} from 'react-icons/fa'
+import Lambda_Logo from '../imgs/Lambda_Logo.png';
 import {withRouter,NavLink} from 'react-router-dom'
 import {useSelector,useDispatch} from 'react-redux'
 import { sortChange,logout } from '../actions';
@@ -37,7 +37,7 @@ function Navigation(props) {
         <Header>
             <Navigate>
                 <span className="menuHeader" onClick={show}>
-                    DevDesk <FaBars/>
+                    <img src={Lambda_Logo} alt="Lambda Logo Mark" height="29" />DevDesk Queue
                 </span>
                 {auth!=='user' &&
                 <section className={classlist}>

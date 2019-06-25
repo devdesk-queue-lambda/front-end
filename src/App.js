@@ -26,7 +26,8 @@ const theme={
   pBgColor:'#f0f4f7',
   accBorderColor:'transparent',
   alertBgAccent:'#3bb5e6',
-  pAlertColor:'#bb1333'
+  pAlertColor:'#bb1333',
+  pTextColor:'#bb1333'
 }
 
 

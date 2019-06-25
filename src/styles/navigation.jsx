@@ -4,9 +4,17 @@ import * as v from './vars'
 export const Navigate=styled.nav`
     span.menuHeader{
         display:inline-block;
-        padding:1rem;
-        margin:.5rem;
+        padding:1rem 0 1rem 1rem;
         border:2px groove ${props=>props.theme.accBorderColor};
+        color:${props=>props.theme.pTextColor}
+        img{
+            position:absolute;
+            left:10px;
+            top:25px;
+        }
+        ${v.TABLET}{
+            padding:1rem 0 1rem 2rem;
+        }
     }
     .menu{
         transform:translatex(-101%);
