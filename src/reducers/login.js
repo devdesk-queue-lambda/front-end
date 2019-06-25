@@ -5,11 +5,10 @@ import {
 } from '../actions';
 
 const initialState = {
-  error: null,
-  username: '',
-  authorizationType: 'admin',
-  isLoggingIn: false,
-  isLoggedIn: false,
+  error: false,
+  errorInfo: {},
+  userID: '',
+  isLoggingIn: false
 }
 
 export const login = (state = initialState, action) => {
@@ -17,21 +16,25 @@ export const login = (state = initialState, action) => {
     case LOGIN_START:
       return {
         ...state,
-        error: null,
+        error: false,
+        errorInfo: {},
         isLoggingIn: true
       }
     case LOGIN_SUCCESS:
       return {
         ...state,
-        error: null,
-        isLoggingIn: false,
-        isLoggedIn: true
+        error: false,
+        errorInfo: {},
+        userID: action.payload.id,
+        authType: action.payload.authType,
+        isLoggingIn: false
       }
     case LOGIN_FAIL:
       return {
         ...state,
-        error: 'Could not login',
-        isLoggingIn: false,
+        error: true,
+        errorInfo: action.payload,
+        isLoggingIn: false
       }
     default:
       return state;
