@@ -1,7 +1,8 @@
 import { 
   LOGIN_START,
   LOGIN_SUCCESS,
-  LOGIN_FAIL
+  LOGIN_FAIL,
+  LOGOUT
 } from '../actions';
 
 const initialState = {
@@ -26,7 +27,6 @@ export const login = (state = initialState, action) => {
         error: false,
         errorInfo: {},
         userID: action.payload.id,
-        authType: action.payload.authType,
         isLoggingIn: false
       }
     case LOGIN_FAIL:
@@ -35,6 +35,12 @@ export const login = (state = initialState, action) => {
         error: true,
         errorInfo: action.payload,
         isLoggingIn: false
+      }
+    case LOGOUT:
+      localStorage.removeItem('token')
+      return{
+        ...state,
+        userID:null,
       }
     default:
       return state;

@@ -26,6 +26,7 @@ export const Header=styled.header`
     padding:0;
     left:0;
     width:100%;
+    height:75px;
     background-color:${props=>props.theme.bgAccent};
     color:${props=>props.theme.accent};
     text-align:left;

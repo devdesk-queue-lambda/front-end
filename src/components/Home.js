@@ -20,10 +20,11 @@ class Home extends React.Component {
   onSubmit = event => {
     event.preventDefault();
     this.props.login(this.state)
-      .then(res => res && this.props.history.push("/user"));
+      .then(res => res && this.props.history.push("/"));
   }
 
   render() {
+    
     return (
       <main className="home">
         {
@@ -55,7 +56,7 @@ class Home extends React.Component {
             )
           :
             (
-              <Redirect to="/UserHome" />
+              <Redirect to="/" />
             )
         }
       </main>
@@ -70,4 +71,3 @@ const mapStateToProps = state => ({
 });
 
 export default connect( mapStateToProps, { login })(Home);
->>>>>>> be010779df34a39181e565889ae8d0f6f865dbbb:devdesk/src/components/Home.js

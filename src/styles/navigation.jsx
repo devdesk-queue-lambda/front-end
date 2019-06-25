@@ -8,7 +8,7 @@ export const Navigate=styled.nav`
         border:2px groove ${props=>props.theme.accBorderColor};
     }
     .menu{
-        transform:translate(-101%);
+        transform:translatex(-101%);
         transition:transform .5s;
         position:absolute;
         left:0;

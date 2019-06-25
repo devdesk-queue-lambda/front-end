@@ -1,5 +1,7 @@
 import React,{useState} from 'react';
 import {ThemeProvider} from 'styled-components'
+import PrivateRoute from './utilities/PrivateRoute';
+import NewTicket from './components/NewTicket';
 
 import { Route } from 'react-router-dom';
 import {Wrapper} from './styles/App'
@@ -7,7 +9,6 @@ import {Wrapper} from './styles/App'
 import Navigation from './components/Navigation';
 import Home from './components/Home';
 import Register from './components/Register';
-import UserHome from './components/UserHome';
 import Ticket from './components/Task';
 import {useSelector,useDispatch} from 'react-redux'
 import {Header} from './styles/HelpList'
@@ -47,8 +48,7 @@ function App() {
     <ThemeProvider theme={theme}>
       <Wrapper>
         <Header>
-          {auth==='admin' && <Navigation/>}
-          {auth!=='admin' && <span onClick={(props)=>{props.history.push('/')}}>DevDesk</span>}
+          <Navigation/>
           <select onChange={e=>{
               setSort(e.target.value)}
           }>
@@ -60,7 +60,6 @@ function App() {
         </Header>
         <Route exact path="/" component={Home} sort={sort}/>
         <Route exact path="/register" component={Register} />
-        <Route path="/user" component={UserHome} />
         <Route path="/users" render={()=>{
           return <Users/>
         }}/>
@@ -69,6 +68,8 @@ function App() {
           return <Ticket {...single} />
         }}/> 
         <Route path=''/>
+        <PrivateRoute path="/create-ticket/" component={NewTicket} /> 
+        <PrivateRoute path={`/ticket/${id}`} component={Ticket} />
       </Wrapper>
     </ThemeProvider>
   );

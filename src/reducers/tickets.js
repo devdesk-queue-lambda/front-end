@@ -62,9 +62,12 @@ export default (state=init,action)=>{
             }
         //admin
         case LIST_MODS:
+            let current=action.payload.filter(user=>state.id===user.id)[0]
             return{
                 ...state,
-                users:action.payload
+                users:action.payload,
+                username:current.username,
+                authenticationType:current.authenticationType
             }
         case ALTER_PRIVLIDGE:
             return{
