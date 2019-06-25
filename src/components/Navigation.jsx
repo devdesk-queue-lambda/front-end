@@ -23,7 +23,7 @@ function Navigation(props) {
     }
 
     const toList=e=>{
-        props.history.push('/');
+        props.history.push('/list');
     }
 
     const toUsers=e=>{

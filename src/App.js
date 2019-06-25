@@ -14,6 +14,7 @@ import {useSelector,useDispatch} from 'react-redux'
 import {Header} from './styles/HelpList'
 import {getCard} from './actions'
 import Users from './components/UsersList'
+import HelpList from './components/HelpList';
 
 const theme={
   bgAccent:'#2f2c4b',
@@ -60,6 +61,7 @@ function App() {
         </Header>
         <Route exact path="/" component={Home} sort={sort}/>
         <Route exact path="/register" component={Register} />
+        
         <Route path="/users" render={()=>{
           return <Users/>
         }}/>
@@ -70,6 +72,7 @@ function App() {
         <Route path=''/>
         <PrivateRoute path="/create-ticket/" component={NewTicket} /> 
         <PrivateRoute path={`/ticket/${id}`} component={Ticket} />
+        <PrivateRoute path='/list' component={HelpList}/>
       </Wrapper>
     </ThemeProvider>
   );

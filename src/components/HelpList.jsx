@@ -13,8 +13,9 @@ function HelpList(props) {
     const dispatch=useDispatch();
 
     useEffect(()=>{
+        
         if(helpers.length<1){
-            dispatch(mods())
+            //dispatch(mods())
         }
     })
 

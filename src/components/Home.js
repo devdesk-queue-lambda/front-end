@@ -56,7 +56,7 @@ class Home extends React.Component {
             )
           :
             (
-              <Redirect to="/" />
+              <Redirect to="/list" />
             )
         }
       </main>

@@ -62,7 +62,8 @@ export default (state=init,action)=>{
             }
         //admin
         case LIST_MODS:
-            let current=action.payload.filter(user=>state.id===user.id)[0]
+            let current=action.payload.filter(user=>state.userID===user.id)[0]
+            console.log(state.userID);
             return{
                 ...state,
                 users:action.payload,
