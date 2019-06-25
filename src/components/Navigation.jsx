@@ -54,6 +54,8 @@ function Navigation(props) {
                             Home
                         </section>
                     </NavLink>
+                    <NavLink to={'/register'}>Register</NavLink>
+                    
                     {auth && 
                         <NavLink to={'/create-ticket'}>
                             <section>
