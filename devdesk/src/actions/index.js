@@ -18,16 +18,14 @@ export const login = credentials => dispatch => {
   dispatch({ type: LOGIN_START });
   return axios.post(`${baseURL}/api/auth/login`, credentials)
     .then(res => {
-      console.log('SUCESS:',res);
       localStorage.setItem("token", res.data.token);
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data
-      }, console.log('res',res));
+      });
       return true;
     })
     .catch(err => {
-      console.log('ERROR:',err.response);
       dispatch({
         type: LOGIN_FAIL,
         payload: err.response.status
@@ -58,10 +56,9 @@ export const register = regInfo => dispatch => {
       return true;
     })
     .catch(err => {
-      console.log('ERROR:',err.response);
       dispatch({
         type: REGISTER_FAIL,
-        payload: err.response.status
+        payload: err.response
       });
       return false;
     });
@@ -82,17 +79,17 @@ export const getTicket = id => dispatch => {
   return axiosWithAuth().get(`${baseURL}/api/tickets/${id}`)
     .then(res => {
       console.log('get',res);
-      // dispatch({
-      //   type: GET_TICKET_SUCCESS,
-      //   payload: res.data.payload
-      // });
+      dispatch({
+        type: GET_TICKET_SUCCESS,
+        payload: res.data
+      });
       return true;
     })
     .catch(err => {
       console.log('ERROR:',err.response);
       dispatch({
         type: GET_TICKET_FAIL,
-        payload: err.response.status
+        payload: err.response
       });
       return false;
     });
@@ -109,11 +106,9 @@ export const SUBMIT_TICKET_SUCCESS = "SUBMIT_TICKET_SUCCESS";
 export const SUBMIT_TICKET_FAIL    = "SUBMIT_TICKET_FAIL";
 
 export const submitTicket = ticketInfo => dispatch => {
-  console.log('submit new ticket');
   dispatch({ type: SUBMIT_TICKET_START });
   return axiosWithAuth().post(`${baseURL}/api/tickets`, ticketInfo)
     .then(res => {
-      console.log('posted')
       dispatch({
         type: SUBMIT_TICKET_SUCCESS,
         payload: res.data.payload
@@ -121,7 +116,6 @@ export const submitTicket = ticketInfo => dispatch => {
       return true;
     })
     .catch(err => {
-      console.log('ERROR:',err.response);
       dispatch({
         type: SUBMIT_TICKET_FAIL,
         payload: err.response.status

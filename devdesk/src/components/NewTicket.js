@@ -38,7 +38,6 @@ class NewTicket extends React.Component {
   }
 
   onSubmit = event => {
-    console.log('submit');
     event.preventDefault();
     this.setState({
       ...this.state,
@@ -50,7 +49,6 @@ class NewTicket extends React.Component {
   }
   
   render() {
-    console.log('this.props.history',this.props.history);
     return (
       <main className="new-ticket">
         <h2>Create New Help Ticket</h2>

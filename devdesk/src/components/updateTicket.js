@@ -2,21 +2,22 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 
-import { updateTicket } from '../actions';
+import { updateTicket, getTicket } from '../actions';
 
 class UpdateTicket extends React.Component {
   state = {
-    title   : '',
-    desc    : '',
-    type    : '',
-    resolved: false,
-    tried   : '',
-    owner   : 1,
-    date    : '',
-    assigned: null
+    title      : this.props.title,
+    description: this.props.description,
+    type       : this.props.type,
+    ressolved  : this.props.ressolved,
+    tried      : this.props.tried,
+    owner      : this.props.owner,
+    date       : this.props.date,
+    assigned   : this.props.assigned
   }
 
   componentDidMount() {
+    console.log('CDM');
     if(this.props.userID === "") {
       this.setState({
         ...this.state,
@@ -28,6 +29,7 @@ class UpdateTicket extends React.Component {
         owner: this.props.userID
       })
     }
+    console.log(this.props.getTicket(1));
   }
 
   changeHandler = event => {
@@ -49,6 +51,7 @@ class UpdateTicket extends React.Component {
   }
   
   render() {
+    console.log('this.props',this.props);
     return (
       <main className="new-ticket">
         <h2>Create New Help Ticket</h2>
@@ -94,8 +97,17 @@ class UpdateTicket extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  error: state.newTicket.error,
-  isSubmittingTicket: state.newTicket.isSubmittingTicket,
-  userID: state.login.userID
-})
-export default connect(mapStateToProps, { submitTupdateTicketicket })(UpdateTicket);
+  error           : state.updateticket.error,
+  isUpdatingTicket: state.updateticket.isSubmittingTicket,
+  userID          : state.updateticket.userID,
+  assigned        : state.updateticket.assigned,
+  date            : state.updateticket.date,
+  id              : state.updateticket.id,
+  owner           : state.updateticket.owner,
+  ressolved       : state.updateticket.ressolved,
+  title           : state.updateticket.title,
+  description     : state.updateticket.description,
+  tried           : state.updateticket.tried,
+  type            : state.updateticket.type
+}, console.log('state',state))
+export default connect(mapStateToProps, { updateTicket, getTicket })(UpdateTicket);

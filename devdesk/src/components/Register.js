@@ -8,7 +8,7 @@ class Register extends React.Component {
   state = {
     username: '',
     password: '',
-    authType : 'user'
+    authType: 'user'
   }
 
   changeHandler = event => {
@@ -35,6 +35,11 @@ class Register extends React.Component {
           <label htmlFor="password">
             <input type="password" name="password" onChange={this.changeHandler} value={this.state.password} id="password" placeholder="Password" required />
           </label>
+          {
+            (this.props.error) && (
+              <div className="error">{ this.props.errorInfo.data.message }</div>
+            )
+          }
           <button>
             {this.props.isRegistering ? (
               <Loader type="ThreeDots" color="#ffffff" height="12" width="26" />
@@ -51,6 +56,7 @@ class Register extends React.Component {
 
 const mapStateToProps = state => ({
   error: state.register.error,
+  errorInfo: state.register.errorInfo,
   isRegistering: state.register.isRegistering
 })
 
