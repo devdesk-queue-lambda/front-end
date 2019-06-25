@@ -7,7 +7,7 @@ export const Card=styled.section`
   border: 2px solid ${props=>props.theme.pBorderColor};
   border-radius:10px;
 
-  margin:.5rem auto;
+  margin:.25rem auto;
 
   display:flex;
   flex-direction:column;

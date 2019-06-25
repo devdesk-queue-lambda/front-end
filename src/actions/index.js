@@ -14,7 +14,7 @@ export const LOGOUT='LOGOUT'
 export const LOGIN_START = "LOGIN_START";
 export const LOGIN_SUCCESS = "LOGIN_SUCCESS";
 export const LOGIN_FAIL = "LOGIN_FAIL";
-const baseURL = "someurl";
+const baseURL = "https://devdesk-backend-v2.herokuapp.com/";
 
 export const ERROR='ERROR'
 export const FLIP_TICKET='FLIP_TICKET'
@@ -24,7 +24,7 @@ export const ALTER_PRIVLIDGE='ALTER_PRIVLIDGE'
 
 export const login = credentials => dispatch => {
     dispatch({ type: LOGIN_START });
-    return axios.post(`${baseURL}/api/login`, credentials)
+    return axios.post(`${baseURL}/api/auth/,login`, credentials)
       .then(res => {
         localStorage.setItem("token", res.data.payload);
         dispatch({
@@ -57,5 +57,14 @@ export const deAssign=e=>dispatch=>{
 }
 
 export const mods=e=>{
-    return {type:LIST_MODS,payload:data.users.filter(user=>user.authType!=='user')}
+    return {type:LIST_MODS,payload:data.users}
+}
+
+export const getCard=e=>{
+  return {type:GET_CARD,payload:e}
+}
+
+export const alterPrivlidge=e=>dispatch=>{
+  dispatch({type:FETCHING})
+  dispatch({type:ALTER_PRIVLIDGE,payload:e})
 }

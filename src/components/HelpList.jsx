@@ -1,18 +1,14 @@
-import React,{useState,useEffect} from 'react'
+import React,{useEffect} from 'react'
 import {useSelector,useDispatch} from 'react-redux'
 import Ticket from './Task'
-import {List,Header} from '../styles/HelpList'
+import {List} from '../styles/HelpList'
 import {mods} from '../actions'
-import Navigation from './Navigation'
 
-function HelpList() {
+function HelpList(props) {
 
     const tickets=useSelector(state=>state.tickets.tickets)
-    const viewed=useSelector(state=>state.tickets.viewed)
-    const id=Number(useSelector(state=>state.login._id))
-    const auth=useSelector(state=>state.login.authType)
-    const helpers=useSelector(state=>state.tickets.mods)
-    const [sort,setSort]=useState('standard')
+    const id=Number(useSelector(state=>state.login.id))
+    const helpers=useSelector(state=>state.tickets.users.filter(user=>user.authorizationType!=='user'))
 
     const dispatch=useDispatch();
 
@@ -22,43 +18,11 @@ function HelpList() {
         }
     })
 
-    if(viewed){
-        return (
-            <section>
-                <Header>
-                    DevDesk
-                    <select onChange={e=>{
-                        setSort(e.target.value)}
-                    }>
-                        <option value="null">Sort Order</option>
-                        <option value="standard">Entry</option>
-                        <option value="owned">Your Tickets</option>
-                        <option value="age">Eldest First</option>
-                    </select>
-                </Header>
-                <List>
-                    <Ticket {...viewed} />
-                </List>
-            </section>
-        )
-    }
     return (
-        <section>
-            <Header>
-                {auth==='admin' && <Navigation/>}
-                {auth!=='admin' && <span>DevDesk</span>}
-                <select onChange={e=>{
-                    setSort(e.target.value)}
-                }>
-                    <option value="null">Sort Order</option>
-                    <option value="standard">Entry</option>
-                    <option value="owned">Your Tickets</option>
-                    <option value="age">Eldest First</option>
-                </select>
-            </Header>
+        <section>            
             <List>
                 {tickets.sort((first,second)=>{
-                    switch(sort){
+                    switch(props.sort){
                         case 'standard':
                             return 0;
                         case 'owned':
@@ -83,7 +47,7 @@ function HelpList() {
                             return 0;
                     }
                 }).map(ticket=>(
-                    <Ticket {...ticket} key={ticket._id}/>
+                    <Ticket {...ticket} key={ticket.id}/>
                 ))}
             </List>
         </section>

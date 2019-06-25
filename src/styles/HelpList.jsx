@@ -7,7 +7,7 @@ export const List=styled.section`
     flex-direction:column;
     margin:auto;
     ${v.FONT_STACK};
-    padding:3rem .5rem;
+    padding:.5rem;
     ${v.TABLET}{
         flex-direction:row;
         flex-wrap:wrap;
@@ -15,12 +15,16 @@ export const List=styled.section`
     }
     ${v.DESKTOP}{
         width:100%;
+        height:100%;
         justify-content:space-evenly;
     }
-`
+    `
 export const Header=styled.header`
-    position:fixed;
+    box-sizing:border-box;
+    position:sticky;
     top:0px;
+    padding:0;
+    left:0;
     width:100%;
     background-color:${props=>props.theme.bgAccent};
     color:${props=>props.theme.accent};
@@ -28,12 +32,22 @@ export const Header=styled.header`
     padding-left:1rem;
     display:flex;
     justify-content:space-between;
+    align-items:center;
     ${v.FONT_STACK};
+    span{
+        display:inline-block;
+        padding:1rem;
+        margin:.5rem;
+        border:2px groove ${props=>props.theme.accBorderColor};
+    }
     select{
         position:relative;
         width:45%;
         height:2rem;
         margin:.5rem;
         right:1rem;
+        ${v.TABLET}{
+            max-width:300px;
+        }
     }
 `

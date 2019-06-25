@@ -7,7 +7,7 @@ import {
 const initialState = {
   error: null,
   username: '',
-  authorizationType: '',
+  authorizationType: 'admin',
   isLoggingIn: false,
   isLoggedIn: false,
 }

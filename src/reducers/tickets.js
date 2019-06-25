@@ -1,9 +1,9 @@
-import {ERROR, GET_CARDS, GET_CARD, EDIT_CARD, FETCHING, DELETE_CARD, FLIP_TICKET, ASSIGN, LIST_MODS } from '../actions'
+import {ERROR, GET_CARDS, GET_CARD, EDIT_CARD, FETCHING, DELETE_CARD, FLIP_TICKET, ASSIGN, LIST_MODS, ALTER_PRIVLIDGE } from '../actions'
 import data from '../dummyData'
 
 const init={
     tickets:data.tickets,
-    mods:[],
+    users:[],
     viewed:null,
     editing:null,
 
@@ -31,8 +31,7 @@ export default (state=init,action)=>{
         case GET_CARD:
             return {
                 ...state,
-                fetching:false,
-                viewed:action.payload,
+                viewed:state.tickets.filter(ticket=>ticket.id===Number(action.payload))[0],
                 editing:null
             }
         case EDIT_CARD:
@@ -49,23 +48,28 @@ export default (state=init,action)=>{
         case DELETE_CARD:
             return {
                 ...state,
-                tickets:state.tickets.filter(i=>i._id!==action.payload)
+                tickets:state.tickets.filter(i=>i.id!==action.payload)
             }
         case FLIP_TICKET:
             return {
                 ...state,
-                tickets:state.tickets.map(ticket=>ticket._id===action.payload._id?action.payload:ticket)
+                tickets:state.tickets.map(ticket=>ticket.id===action.payload.id?action.payload:ticket)
             }
         case ASSIGN:
             return{
                 ...state,
-                tickets:state.tickets.map(ticket=>ticket._id===action.payload._id?action.payload:ticket)
+                tickets:state.tickets.map(ticket=>ticket.id===action.payload.id?action.payload:ticket)
             }
         //admin
         case LIST_MODS:
             return{
                 ...state,
-                mods:action.payload
+                users:action.payload
+            }
+        case ALTER_PRIVLIDGE:
+            return{
+                ...state,
+                users:state.users.map(user=>user.id===action.payload.id?action.payload:user)
             }
         default:
             return state

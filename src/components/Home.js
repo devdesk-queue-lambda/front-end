@@ -18,7 +18,6 @@ class Home extends React.Component {
   render() {
     return (
       <div className="Home">
-        this is the login/landing page
         {
           !localStorage.getItem("token") ?
             (

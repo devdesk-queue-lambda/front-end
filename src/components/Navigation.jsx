@@ -2,8 +2,9 @@ import React,{useState} from 'react'
 import {Navigate} from '../styles/navigation'
 import cn from '../helpers/ClassReducer'
 import {FaBars} from 'react-icons/fa'
+import {withRouter} from 'react-router-dom'
 
-function Navigation() {
+function Navigation(props) {
 
     const [display,setDisplay]=useState(false)
 
@@ -17,11 +18,11 @@ function Navigation() {
     }
 
     const toList=e=>{
-        console.log('to tickets');
+        props.history.push('/');
     }
 
     const toUsers=e=>{
-        console.log('to users')
+        props.history.push('/users')
     }
 
     return (
@@ -41,4 +42,4 @@ function Navigation() {
     )
 }
 
-export default Navigation
+export default withRouter(Navigation)
