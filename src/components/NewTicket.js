@@ -6,11 +6,28 @@ import { submitTicket } from '../actions';
 
 class NewTicket extends React.Component {
   state = {
-    title : '',
-    desc  : '',
-    cat   : '',
-    status: 'open',
-    tried : ''
+    title      : '',
+    description: '',
+    type       : '',
+    ressolved  : false,
+    tried      : '',
+    owner      : 1,
+    assigned   : null,
+    date       : ''
+  }
+
+  componentDidMount() {
+    if(this.props.userID === "") {
+      this.setState({
+        ...this.state,
+        owner: parseInt(localStorage.getItem('userID'))
+      })
+    } else {
+      this.setState({
+        ...this.state,
+        owner: this.props.userID
+      })
+    }
   }
 
   changeHandler = event => {
@@ -21,23 +38,30 @@ class NewTicket extends React.Component {
   }
 
   onSubmit = event => {
+    console.log('submit');
     event.preventDefault();
-    //this.props.login(this.state);
-      //.then(res => res && this.props.history.push("/user"));
+    this.setState({
+      ...this.state,
+      date: new Date()
+    }, () => {
+      this.props.submitTicket(this.state)
+        .then(res => res && this.props.history.push("/user"));
+    })
   }
   
   render() {
+    console.log('this.props.history',this.props.history);
     return (
       <main className="new-ticket">
         <h2>Create New Help Ticket</h2>
         <form onSubmit={this.onSubmit}>
           <div className="header">
             <label htmlFor="title">Title:</label>
-            <input type="text" name="title" onChange={this.changeHandler} id="title" />
+            <input type="text" name="title" onChange={this.changeHandler} id="title" required />
           </div>
           <div className="cat">
-            <label htmlFor="cat">Category:
-            <select name="cat" id="cat" onChange={this.changeHandler}>
+            <label htmlFor="type">Category:
+            <select name="type" id="type" onChange={this.changeHandler} required>
               <option value="">select category</option>
               <option value="login">login</option>
               <option value="grade">grade</option>
@@ -51,11 +75,11 @@ class NewTicket extends React.Component {
             </select></label>
           </div>
           <div className="textareas">
-            <label htmlFor="desc">Description of Problem:
-              <textarea type="text" name="desc" onChange={this.changeHandler} id="desc" placeholder="Explain problem here."></textarea>
+            <label htmlFor="description">descriptionription of Problem:
+              <textarea type="text" name="description" onChange={this.changeHandler} id="description" placeholder="Explain problem here." required></textarea>
             </label>
             <label className="tried">Things Tried:
-              <textarea type="text" name="tried" onChange={this.changeHandler} id="tried" data-key="0" placeholder="What have your tried?"></textarea>
+              <textarea type="text" name="tried" onChange={this.changeHandler} id="tried" data-key="0" placeholder="What have your tried?" required></textarea>
             </label>
           </div>
           <button type="submit">
@@ -73,6 +97,7 @@ class NewTicket extends React.Component {
 
 const mapStateToProps = state => ({
   error: state.newTicket.error,
-  isSubmittingTicket: state.newTicket.isSubmittingTicket
+  isSubmittingTicket: state.newTicket.isSubmittingTicket,
+  userID: state.login.userID
 })
 export default connect(mapStateToProps, { submitTicket })(NewTicket);

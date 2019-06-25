@@ -4,11 +4,9 @@ import { register } from './register';
 import { newTicket } from './newticket';
 import tickets from './tickets'
 
-
 export default combineReducers({
   login,
   register,
   newTicket,
   tickets
-
 });

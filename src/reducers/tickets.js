@@ -1,4 +1,4 @@
-import {ERROR, GET_CARDS, GET_CARD, EDIT_CARD, FETCHING, DELETE_CARD, FLIP_TICKET, ASSIGN, LIST_MODS, ALTER_PRIVLIDGE } from '../actions'
+import {ERROR, GET_CARDS, GET_CARD, EDIT_CARD, FETCHING, DELETE_CARD, FLIP_TICKET, ASSIGN, LIST_MODS, ALTER_PRIVLIDGE, CHANGE_SORT, LOGOUT } from '../actions'
 import data from '../dummyData'
 
 const init={
@@ -6,6 +6,7 @@ const init={
     users:[],
     viewed:null,
     editing:null,
+    sort:'standard',
 
     fetching:false,
     error:null
@@ -74,6 +75,16 @@ export default (state=init,action)=>{
             return{
                 ...state,
                 users:state.users.map(user=>user.id===action.payload.id?action.payload:user)
+            }
+        case CHANGE_SORT:
+            return{
+                ...state,
+                sort:action.payload
+            }
+        case LOGOUT:
+            return{
+                ...state,
+                userID:''
             }
         default:
             return state

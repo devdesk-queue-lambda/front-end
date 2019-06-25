@@ -1,8 +1,7 @@
 import { 
   LOGIN_START,
   LOGIN_SUCCESS,
-  LOGIN_FAIL,
-  LOGOUT
+  LOGIN_FAIL
 } from '../actions';
 
 const initialState = {
@@ -35,12 +34,6 @@ export const login = (state = initialState, action) => {
         error: true,
         errorInfo: action.payload,
         isLoggingIn: false
-      }
-    case LOGOUT:
-      localStorage.removeItem('token')
-      return{
-        ...state,
-        userID:null,
       }
     default:
       return state;
