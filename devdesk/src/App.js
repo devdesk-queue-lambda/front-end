@@ -1,11 +1,12 @@
 import React from 'react';
 import { Route } from 'react-router-dom';
-//import PrivateRoute from './utilities/PrivateRoute';
+import PrivateRoute from './utilities/PrivateRoute';
 
 import Navigation from './components/Navigation';
 import Home from './components/Home';
 import Register from './components/Register';
 import UserHome from './components/UserHome';
+import NewTicket from './components/NewTicket';
 import Ticket from './components/Ticket';
 
 function App() {
@@ -16,12 +17,10 @@ function App() {
       
       <Route exact path="/" component={Home} />
       <Route exact path="/register" component={Register} />
-      <Route path="/user" component={UserHome} />
-      <Route path={`/ticket/${id}`} component={Ticket} /> 
-      {/*
-      <Route exact path="/register" component={Register} />
       <PrivateRoute path="/user" component={UserHome} />
-      <PrivateRoute path={`/ticket/${id}`} component={Ticket} />      {/* ticket will have an edit state within it */}
+      <PrivateRoute path="/create-ticket/" component={NewTicket} /> 
+      <PrivateRoute path={`/ticket/${id}`} component={Ticket} />
+      {/* ticket will have an edit state within it */}
     </div>
   );
 }
