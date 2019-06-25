@@ -39,7 +39,7 @@ function Navigation(props) {
                 <span className="menuHeader" onClick={show}>
                     <img src={Lambda_Logo} alt="Lambda Logo Mark" height="29" />DevDesk Queue
                 </span>
-                {auth!=='user' &&
+                {(auth && auth!=='user') &&
                 <section className={classlist}>
                     <NavLink to="/users">
                         <section>
@@ -54,19 +54,30 @@ function Navigation(props) {
                             Home
                         </section>
                     </NavLink>
-                    <section onClick={log}>
-                        Logout
-                    </section>
+                    {auth && 
+                        <NavLink to={'/create-ticket'}>
+                            <section>
+                                Create Ticket
+                            </section>
+                        </NavLink>
+                    }
+                    {auth &&
+                        <section onClick={log}>
+                            Logout
+                        </section>
+                    }
                 </section>
             </Navigate>
-            <select onChange={setSort}
-                value={sort}
-            >
-                <option value="null">Sort Order</option>
-                <option value="standard">Entry</option>
-                <option value="owned">Your Tickets</option>
-                <option value="age">Eldest First</option>
-            </select>
+            {auth && 
+                <select onChange={setSort}
+                    value={sort}
+                >
+                    <option value="null">Sort Order</option>
+                    <option value="standard">Entry</option>
+                    <option value="owned">Your Tickets</option>
+                    <option value="age">Eldest First</option>
+                </select>
+            }
         </Header>
     )
 }
