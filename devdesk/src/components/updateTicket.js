@@ -2,18 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 
-import { submitTicket } from '../actions';
+import { updateTicket } from '../actions';
 
-class NewTicket extends React.Component {
+class UpdateTicket extends React.Component {
   state = {
-    title      : '',
-    description: '',
-    type       : '',
-    ressolved  : false,
-    tried      : '',
-    owner      : 1,
-    assigned   : null,
-    date       : ''
+    title   : '',
+    desc    : '',
+    type    : '',
+    resolved: false,
+    tried   : '',
+    owner   : 1,
+    date    : '',
+    assigned: null
   }
 
   componentDidMount() {
@@ -38,30 +38,28 @@ class NewTicket extends React.Component {
   }
 
   onSubmit = event => {
-    console.log('submit');
     event.preventDefault();
     this.setState({
       ...this.state,
       date: new Date()
     }, () => {
-      this.props.submitTicket(this.state)
+      this.props.updateTicket(this.state)
         .then(res => res && this.props.history.push("/user"));
     })
   }
   
   render() {
-    console.log('this.props.history',this.props.history);
     return (
       <main className="new-ticket">
         <h2>Create New Help Ticket</h2>
         <form onSubmit={this.onSubmit}>
           <div className="header">
             <label htmlFor="title">Title:</label>
-            <input type="text" name="title" onChange={this.changeHandler} id="title" required />
+            <input type="text" name="title" onChange={this.changeHandler} id="title" />
           </div>
           <div className="cat">
             <label htmlFor="type">Category:
-            <select name="type" id="type" onChange={this.changeHandler} required>
+            <select name="type" id="type" onChange={this.changeHandler}>
               <option value="">select category</option>
               <option value="login">login</option>
               <option value="grade">grade</option>
@@ -75,11 +73,11 @@ class NewTicket extends React.Component {
             </select></label>
           </div>
           <div className="textareas">
-            <label htmlFor="description">descriptionription of Problem:
-              <textarea type="text" name="description" onChange={this.changeHandler} id="description" placeholder="Explain problem here." required></textarea>
+            <label htmlFor="desc">Description of Problem:
+              <textarea type="text" name="desc" onChange={this.changeHandler} id="desc" placeholder="Explain problem here."></textarea>
             </label>
             <label className="tried">Things Tried:
-              <textarea type="text" name="tried" onChange={this.changeHandler} id="tried" data-key="0" placeholder="What have your tried?" required></textarea>
+              <textarea type="text" name="tried" onChange={this.changeHandler} id="tried" data-key="0" placeholder="What have your tried?"></textarea>
             </label>
           </div>
           <button type="submit">
@@ -100,4 +98,4 @@ const mapStateToProps = state => ({
   isSubmittingTicket: state.newTicket.isSubmittingTicket,
   userID: state.login.userID
 })
-export default connect(mapStateToProps, { submitTicket })(NewTicket);
+export default connect(mapStateToProps, { submitTupdateTicketicket })(UpdateTicket);
