@@ -2,7 +2,7 @@ import {ERROR, GET_CARDS, GET_CARD, EDIT_CARD, FETCHING, DELETE_CARD, FLIP_TICKE
 import data from '../dummyData'
 
 const init={
-    tickets:data.tickets,
+    tickets:[],
     users:[],
     viewed:null,
     editing:null,
