@@ -1,12 +1,14 @@
 import { 
   SUBMIT_TICKET_START,
   SUBMIT_TICKET_SUCCESS,
-  SUBMIT_TICKET_FAIL
+  SUBMIT_TICKET_FAIL,
+  CLEAR_NEW_TICKET,
 } from '../actions';
 
 const initialState = {
   error: "",
-  isSubmittingTicket: false
+  isSubmittingTicket: false,
+  newTicket:false
 }
 
 export const newTicket = (state = initialState, action) => {
@@ -21,13 +23,19 @@ export const newTicket = (state = initialState, action) => {
       return {
         ...state,
         error: "",
-        isSubmittingTicket: false
+        isSubmittingTicket: false,
+        newTicket:true
       }
     case SUBMIT_TICKET_FAIL:
       return {
         ...state,
         error: "",
         isSubmittingTicket: false,
+      }
+    case CLEAR_NEW_TICKET:
+      return{
+        ...state,
+        newTicket:false
       }
     default:
       return state;

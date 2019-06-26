@@ -14,6 +14,7 @@ import {useSelector,useDispatch} from 'react-redux'
 import {getCard, load, logout} from './actions'
 import Users from './components/UsersList'
 import HelpList from './components/HelpList';
+import UpdateTicket from './components/updateTicket'
 
 const theme={
   bgAccent:'#2f2c4b',
@@ -76,6 +77,8 @@ function App() {
         }}/> 
         <PrivateRoute path="/create-ticket/" component={NewTicket} /> 
         <PrivateRoute path='/list' component={HelpList}/>
+        <PrivateRoute path="/edit-ticket/:id" component={UpdateTicket} /> 
+
       </Wrapper>
     </ThemeProvider>
   );

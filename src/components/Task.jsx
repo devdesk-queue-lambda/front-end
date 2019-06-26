@@ -16,7 +16,7 @@ function Task(props) {
     const assigned=mods.filter(mod=>mod.id===props.assigned)[0]
 
     const edit=e=>{
-        console.log(props);
+        props.history.push(`/edit-ticket/${props.id}`)
     }
 
     const finish=e=>{
@@ -73,7 +73,7 @@ function Task(props) {
             <ButtonSection>
                 {props.owner===id && 
                     <InfoButton onClick={edit}>
-                        Edit Selection
+                        Edit Ticket
                     </InfoButton>
                 }
                 {(authType==='helper' && props.assigned===null)&& 
@@ -92,14 +92,10 @@ function Task(props) {
                             <option value={mod.id} key={mod.id}>{mod.username}</option>
                         ))}
                     </select>
-                }{props.owner===id &&
-                    <InfoButton onClick={edit}>
-                        Edit Ticket
-                    </InfoButton>
                 }
                 {(props.owner===id || (authType==='helper' && props.assigned===id) || authType==='admin') && 
                     <KillButton onClick={del}>
-                        Delete Selection
+                        Delete Ticket
                     </KillButton>
                 }
             </ButtonSection>

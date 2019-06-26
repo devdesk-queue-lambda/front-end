@@ -52,10 +52,11 @@ class UpdateTicket extends React.Component {
     event.preventDefault();
     this.setState({
       ...this.state,
-      date: new Date()
+      date: new Date(),
+      id:this.props.match.params.id
     }, () => {
       this.props.updateTicket(this.state)
-        .then(res => res && this.props.history.push("/user"));
+        .then(res => res && this.props.history.push("/list"));
     })
   }
   

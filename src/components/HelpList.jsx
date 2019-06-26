@@ -2,18 +2,29 @@ import React,{useEffect} from 'react'
 import {useSelector,useDispatch} from 'react-redux'
 import Ticket from './Task'
 import {List} from '../styles/HelpList'
-import {mods} from '../actions'
+import {getCards, resetTicketUpdated,clearNewTicket} from '../actions'
 
 function HelpList(props) {
+    const dispatch=useDispatch()
 
     const tickets=useSelector(state=>state.tickets.tickets)
     const id=Number(localStorage.getItem('userId'))
-    const helpers=useSelector(state=>state.tickets.users.filter(user=>user.authType!=='user'))
     const loading=useSelector(state=>state.tickets.fetching)
-    const dispatch=useDispatch();
+
+    const updatedTicket=useSelector(state=>state.updateticket.ticketUpdated)
+    const newTicket=useSelector(state=>state.newTicket.newTicket)
+
+    useEffect(()=>{
+        if(updatedTicket){
+            dispatch(getCards())
+            dispatch(resetTicketUpdated())
+        }else if(newTicket){
+            dispatch(getCards())
+            dispatch(clearNewTicket());
+        }
+    })
 
     const sort=useSelector(state=>state.tickets.sort)
-    console.log('rendering',sort);
     return (
         <section>            
             <List>

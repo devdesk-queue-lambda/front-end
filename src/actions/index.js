@@ -108,7 +108,6 @@ export const getCards=e=>dispatch=>{
   let axios=axiosWithAuth()
     let res=axios.get(`${baseURL}/api/tickets`)
     res.then(data=>{
-      console.log(data.data);
       dispatch({
         type:GET_CARDS,
         payload:data.data
@@ -131,6 +130,10 @@ export const load=e=>dispatch=>{
   }).catch(err=>{
     dispatch({type:ERROR,payload:err.response.data.message})
   })
+}
+
+export const clearNewTicket=e=>{
+  return {type:CLEAR_NEW_TICKET}
 }
 
 ////////////////
@@ -232,6 +235,8 @@ export const getTicket = id => dispatch => {
 export const SUBMIT_TICKET_START   = "SUBMIT_TICKET_START";
 export const SUBMIT_TICKET_SUCCESS = "SUBMIT_TICKET_SUCCESS";
 export const SUBMIT_TICKET_FAIL    = "SUBMIT_TICKET_FAIL";
+export const CLEAR_NEW_TICKET      = "CLEAR_NEW_TICKET";
+
 
 export const submitTicket = ticketInfo => dispatch => {
   dispatch({ type: SUBMIT_TICKET_START });

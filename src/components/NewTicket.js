@@ -44,7 +44,7 @@ class NewTicket extends React.Component {
       date: new Date()
     }, () => {
       this.props.submitTicket(this.state)
-        .then(res => res && this.props.history.push("/user"));
+        .then(res => res && this.props.history.push("/list"));
     })
   }
   
