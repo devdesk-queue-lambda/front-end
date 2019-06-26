@@ -61,6 +61,30 @@ main {
     font-size: 0.875rem;
     border: solid 1px #15a11c;
     border-radius: 4px;
+    display: inline-block;
+  }
+
+  &.new-ticket {
+    button[type="submit"] {
+      width: 148px;
+    }
+
+    .success {
+      margin-left: 10px;
+      opacity: 1;
+      animation: fadeout 0.5s 1.25s normal forwards;
+    }
+
+    .error {
+      margin-left: 10px;
+      opacity: 1;
+      animation: fadeout 0.5s 1.25s normal forwards;
+    }
+
+    @keyframes fadeout {
+      0% {  opacity: 1; }
+      100% { opacity: 0; }
+    }
   }
 
   .error {
@@ -72,6 +96,7 @@ main {
     font-size: 0.875rem;
     border: solid 1px #bf0000;
     border-radius: 4px;
+    display: inline-block;
   }
 
   &.new-ticket {
@@ -182,6 +207,17 @@ main {
       &:hover {
         opacity: 1;
       }
+    }
+  }
+
+  &.logout {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: center;
+    align-items: center;
+
+    h2 {
+      margin-bottom: 200px;
     }
   }
 }
