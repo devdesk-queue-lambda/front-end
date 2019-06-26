@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { axiosWithAuth } from '../utilities/axiosWithAuth';
 
-// const baseURL = "https://devdesk-backend-v2.herokuapp.com";
 const baseURL = "https://devdesk-backend.herokuapp.com";
 
 ////////////////
@@ -48,7 +47,6 @@ export const register = regInfo => dispatch => {
   dispatch({ type: REGISTER_START });
   return axios.post(`${baseURL}/api/auth/register`, regInfo)
     .then(res => {
-      console.log('register res',res);
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data.message
@@ -107,7 +105,6 @@ export const submitTicket = ticketInfo => dispatch => {
   dispatch({ type: SUBMIT_TICKET_START });
   return axiosWithAuth().post(`${baseURL}/api/tickets`, ticketInfo)
     .then(res => {
-      console.log(res.data);
       dispatch({
         type: SUBMIT_TICKET_SUCCESS,
         payload: res.data.payload
@@ -135,7 +132,6 @@ export const UPDATE_TICKET_FAIL    = "UPDATE_TICKET_FAIL";
 export const RESET_UPDATE_TICKET   = "RESET_UPDATE_TICKET";
 
 export const resetTicketUpdated = () => dispatch => {
-  console.log('reset');
   dispatch({ type: RESET_UPDATE_TICKET });
 }
 
@@ -143,7 +139,6 @@ export const updateTicket = ticketInfo => dispatch => {
   dispatch({ type: UPDATE_TICKET_START });
   return axiosWithAuth().put(`${baseURL}/api/tickets/${ticketInfo.id}`, ticketInfo)
     .then(res => {
-      console.log('update ticket');
       dispatch({
         type: UPDATE_TICKET_SUCCESS,
         payload: res.data
@@ -151,7 +146,6 @@ export const updateTicket = ticketInfo => dispatch => {
       return true;
     })
     .catch(err => {
-      console.log('ERROR',err.response)
       dispatch({
         type: UPDATE_TICKET_FAIL,
         payload: err.response

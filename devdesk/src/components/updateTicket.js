@@ -100,7 +100,6 @@ class UpdateTicket extends React.Component {
               "Submit Ticket"
             )}
           </button>
-           {console.log('this.props.errinfo',this.props.errorInfo)}
           {this.props.ticketUpdated ?
             (
               setTimeout(() => {this.props.resetTicketUpdated()}, 3000),

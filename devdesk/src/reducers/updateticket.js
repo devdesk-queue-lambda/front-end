@@ -89,7 +89,6 @@ export const updateticket = (state = initialState, action) => {
         ticketUpdated     : true
       }
     case UPDATE_TICKET_FAIL:
-      console.log('error payload', action.payload);
       return {
         ...state,
         error             : true,
