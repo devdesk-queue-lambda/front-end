@@ -52,6 +52,17 @@ main {
     }
   }
 
+  .success {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #d8ffcf;
+    color: #15a11c;
+    text-align: center;
+    font-size: 0.875rem;
+    border: solid 1px #15a11c;
+    border-radius: 4px;
+  }
+
   .error {
     margin-bottom: 10px;
     padding: 10px;

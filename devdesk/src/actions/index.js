@@ -48,10 +48,10 @@ export const register = regInfo => dispatch => {
   dispatch({ type: REGISTER_START });
   return axios.post(`${baseURL}/api/auth/register`, regInfo)
     .then(res => {
-      localStorage.setItem("token", res.data.payload);
+      console.log('register res',res);
       dispatch({
         type: REGISTER_SUCCESS,
-        payload: res.data.payload
+        payload: res.data.message
       });
       return true;
     })
@@ -78,12 +78,12 @@ export const getTicket = id => dispatch => {
   dispatch({ type: GET_TICKET_START });
   return axiosWithAuth().get(`${baseURL}/api/tickets/${id}`)
     .then(res => {
-      console.log('get',res);
+      // console.log('get',res.data);
       dispatch({
         type: GET_TICKET_SUCCESS,
         payload: res.data
       });
-      return true;
+      return res.data;
     })
     .catch(err => {
       console.log('ERROR:',err.response);
@@ -109,6 +109,7 @@ export const submitTicket = ticketInfo => dispatch => {
   dispatch({ type: SUBMIT_TICKET_START });
   return axiosWithAuth().post(`${baseURL}/api/tickets`, ticketInfo)
     .then(res => {
+      console.log(res.data);
       dispatch({
         type: SUBMIT_TICKET_SUCCESS,
         payload: res.data.payload

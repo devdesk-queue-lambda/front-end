@@ -1,7 +1,7 @@
 import { 
-  GET_TICKET_START,
-  GET_TICKET_SUCCESS,
-  GET_TICKET_FAIL
+  UPDATE_TICKET_START,
+  UPDATE_TICKET_SUCCESS,
+  UPDATE_TICKET_FAIL
 } from '../actions';
 
 const initialState = {
@@ -21,13 +21,13 @@ const initialState = {
 
 export const updateticket = (state = initialState, action) => {
   switch(action.type) {
-    case GET_TICKET_START:
+    case UPDATE_TICKET_START:
       return {
         ...state,
         error: "",
         isSubmittingTicket: true
       }
-    case GET_TICKET_SUCCESS:
+    case UPDATE_TICKET_SUCCESS:
       return {
         ...state,
         error           : false,
@@ -43,7 +43,7 @@ export const updateticket = (state = initialState, action) => {
         type            : action.paylost.type,
         isSubmittingTicket: false
       }
-    case GET_TICKET_FAIL:
+    case UPDATE_TICKET_FAIL:
       return {
         ...state,
         error: "",
