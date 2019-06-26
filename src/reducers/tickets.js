@@ -1,4 +1,4 @@
-import {ERROR, GET_CARDS, GET_CARD, EDIT_CARD, FETCHING, DELETE_CARD, FLIP_TICKET, ASSIGN, LIST_MODS, ALTER_PRIVLIDGE, CHANGE_SORT, LOGOUT } from '../actions'
+import {ERROR, GET_CARDS, GET_CARD, EDIT_CARD, FETCHING, DELETE_CARD, FLIP_TICKET, ASSIGN, LIST_MODS, ALTER_PRIVLIDGE, CHANGE_SORT, LOGOUT, FULL_LOAD } from '../actions'
 import data from '../dummyData'
 
 const init={
@@ -16,10 +16,12 @@ export default (state=init,action)=>{
     switch(action.type){
         //logins
         case ERROR:
+            console.log(action.payload);
             return {
                 ...state,
                 login:false,
-                error:action.payload
+                error:action.payload,
+                fetching:false
             }
         //card
         case GET_CARDS:
@@ -27,7 +29,8 @@ export default (state=init,action)=>{
                 ...state,
                 fetching:false,
                 tickets:action.payload,
-                editing:null
+                editing:null,
+                error:null
             }
         case GET_CARD:
             return {
@@ -63,13 +66,13 @@ export default (state=init,action)=>{
             }
         //admin
         case LIST_MODS:
-            let current=action.payload.filter(user=>state.userID===user.id)[0]
-            console.log(state.userID);
+            let current=action.payload.filter(user=>Number(localStorage.getItem('userId'))===user.id)[0]
             return{
                 ...state,
                 users:action.payload,
                 username:current.username,
-                authenticationType:current.authenticationType
+                authenticationType:current.authType,
+                id:current.id
             }
         case ALTER_PRIVLIDGE:
             return{
@@ -84,7 +87,21 @@ export default (state=init,action)=>{
         case LOGOUT:
             return{
                 ...state,
-                userID:''
+                userID:'',
+                username:'',
+                authenticationType:null
+            }
+        case FULL_LOAD:
+            let currentAgain=action.users.filter(user=>Number(localStorage.getItem('userId'))===user.id)[0]
+            console.log(currentAgain);
+            return {
+                ...state,
+                fetching:false,
+                cards:action.cards,
+                users:action.users,
+                username:currentAgain.username,
+                authenticationType:currentAgain.authType,
+                id:currentAgain.id
             }
         default:
             return state

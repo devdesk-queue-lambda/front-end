@@ -1,11 +1,11 @@
-import React,{useState} from 'react'
+import React,{useState,useEffect} from 'react'
 import {Navigate} from '../styles/navigation'
 import {Header} from '../styles/Header'
 import cn from '../helpers/ClassReducer'
 import Lambda_Logo from '../imgs/Lambda_Logo.png';
 import {withRouter,NavLink} from 'react-router-dom'
 import {useSelector,useDispatch} from 'react-redux'
-import { sortChange,logout } from '../actions';
+import { sortChange,logout,mods } from '../actions';
 
 function Navigation(props) {
     const dispatch=useDispatch()
@@ -13,8 +13,11 @@ function Navigation(props) {
     const [display,setDisplay]=useState(false)
     
     const sort=useSelector(state=>state.tickets.sort)
-    const auth=useSelector(state=>state.authorizationType)
+    const auth=useSelector(state=>state.tickets.authenticationType)
+    const id=useSelector(state=>state.tickets.id)
     
+    
+
     const setSort=e=>{
         dispatch(sortChange(e.target.value))
     }
@@ -54,7 +57,7 @@ function Navigation(props) {
                             Home
                         </section>
                     </NavLink>
-                    <NavLink to={'/register'}>Register</NavLink>
+                    <NavLink to={'/register'}><section>Register</section></NavLink>
                     
                     {auth && 
                         <NavLink to={'/create-ticket'}>

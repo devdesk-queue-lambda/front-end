@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {ThemeProvider} from 'styled-components'
 import PrivateRoute from './utilities/PrivateRoute';
 import NewTicket from './components/NewTicket';
@@ -11,7 +11,7 @@ import Home from './components/Home';
 import Register from './components/Register';
 import Ticket from './components/Task';
 import {useSelector,useDispatch} from 'react-redux'
-import {getCard} from './actions'
+import {getCard, load, logout} from './actions'
 import Users from './components/UsersList'
 import HelpList from './components/HelpList';
 
@@ -32,9 +32,12 @@ const theme={
 
 
 function App() {
-  const id=0
   const single=useSelector(state=>state.tickets.viewed)
-  const auth=useSelector(state=>state.login.authorizationType)
+  const auth=useSelector(state=>state.tickets.authenticationType)
+  const loading=useSelector(state=>state.login.isLoggingIn)
+  const fetching=useSelector(state=>state.tickets.fetching)
+  const err=useSelector(state=>state.login.error)
+  const errInfo=useSelector(state=>state.login.errorInfo)
 
   const dispatch=useDispatch()
 
@@ -44,10 +47,21 @@ function App() {
     }
   }
 
+  useEffect(()=>{
+    if(localStorage.getItem("token") && localStorage.getItem('userId') && auth===undefined){
+      dispatch(load())
+    }else if(err){
+      dispatch(logout());
+    }
+  })
+
   return (
     <ThemeProvider theme={theme}>
       <Wrapper>
         <Navigation/>
+        {loading && <section className="loading">Loading</section>}
+        {fetching && <section className="loading">Loading</section>}
+        {err && <section className="error">Error: {errInfo}</section>}
         <Route exact path="/" component={Home}/>
         <Route exact path="/register" component={Register} />
         

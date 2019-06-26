@@ -23,7 +23,6 @@ export const register = (state = initialState, action) => {
       return {
         ...state,
         error: false,
-        userID: action.payload.id,
         isRegistering: false
       }
     case REGISTER_FAIL:

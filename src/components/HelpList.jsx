@@ -8,20 +8,14 @@ function HelpList(props) {
 
     const tickets=useSelector(state=>state.tickets.tickets)
     const id=Number(useSelector(state=>state.login.id))
-    const helpers=useSelector(state=>state.tickets.users.filter(user=>user.authorizationType!=='user'))
-
+    const helpers=useSelector(state=>state.tickets.users.filter(user=>user.authenticationType!=='user'))
+    const loading=useSelector(state=>state.tickets.fetching)
     const dispatch=useDispatch();
-
-    useEffect(()=>{
-        
-        if(helpers.length<1){
-            //dispatch(mods())
-        }
-    })
 
     return (
         <section>            
             <List>
+                {( !loading && tickets.length<1) && <section>No Tickets</section>}
                 {tickets.sort((first,second)=>{
                     switch(props.sort){
                         case 'standard':

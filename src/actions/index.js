@@ -20,6 +20,7 @@ export const FLIP_TICKET='FLIP_TICKET'
 export const LIST_MODS='LIST_MODS'
 export const ALTER_PRIVLIDGE='ALTER_PRIVLIDGE'
 export const CHANGE_SORT="CHANGE_SORT"
+export const FULL_LOAD='FULL_LOAD'
 
 export const removeTicket=e=>dispatch=>{
     dispatch({type:FETCHING})
@@ -41,8 +42,16 @@ export const deAssign=e=>dispatch=>{
     dispatch({type:ASSIGN,payload:e})
 }
 
-export const mods=e=>{
-    return {type:LIST_MODS,payload:data.users}
+export const mods=e=>dispatch=>{
+    dispatch({type:FETCHING})
+    let axios=axiosWithAuth()
+    let res=axios.get(`${baseURL}/api/users`)
+    res.then(data=>{
+      dispatch({type:LIST_MODS,payload:data.data})
+    }).catch(err=>{
+      dispatch({type:LOGIN_FAIL,payload:err.response.data.message})
+    })
+    // return {type:LIST_MODS,payload:res.data}
 }
 
 export const getCard=e=>{
@@ -62,6 +71,36 @@ export const logout=e=>{
 
 export const sortChange=e=>{
   return({type:CHANGE_SORT,payload:e})
+}
+
+export const getCards=e=>dispatch=>{
+  dispatch({type:FETCHING})
+  let axios=axiosWithAuth()
+    let res=axios.get(`${baseURL}/api/tickets`)
+    res.then(data=>{
+      console.log(data.data);
+      dispatch({
+        type:GET_CARDS,
+        payload:data.data
+      })
+    }).catch(err=>{
+      dispatch({type:LOGIN_FAIL,payload:err.response.data.message})
+    })
+}
+
+export const load=e=>dispatch=>{
+  dispatch({type:FETCHING})
+  let axios=axiosWithAuth()
+  let res=axios.get(`${baseURL}/api/tickets`)
+  .then(back=>{
+    let temp=back.data
+    res=axios.get(`${baseURL}/api/users`)
+    .then(back=>{
+      dispatch({type:FULL_LOAD,users:back.data,tickets:temp})
+    })
+  }).catch(err=>{
+    dispatch({type:ERROR,payload:err.response.data.message})
+  })
 }
 
 ////////////////
@@ -111,12 +150,10 @@ export const register = regInfo => dispatch => {
   dispatch({ type: REGISTER_START });
   return axios.post(`${baseURL}/api/auth/register`, regInfo)
     .then(res => {
-      localStorage.setItem("token", res.data.payload);
       dispatch({
-        type: REGISTER_SUCCESS,
-        payload: res.data.payload
+        type: REGISTER_SUCCESS
       });
-      return true;
+      login({...regInfo})
     })
     .catch(err => {
       console.log('ERROR:',err.response);
