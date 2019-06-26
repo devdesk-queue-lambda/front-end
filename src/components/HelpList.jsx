@@ -7,19 +7,21 @@ import {mods} from '../actions'
 function HelpList(props) {
 
     const tickets=useSelector(state=>state.tickets.tickets)
-    const id=Number(useSelector(state=>state.login.id))
+    const id=Number(localStorage.getItem('userId'))
     const helpers=useSelector(state=>state.tickets.users.filter(user=>user.authType!=='user'))
     const loading=useSelector(state=>state.tickets.fetching)
     const dispatch=useDispatch();
 
+    const sort=useSelector(state=>state.tickets.sort)
+    console.log('rendering',sort);
     return (
         <section>            
             <List>
                 {( !loading && tickets.length<1) && <section>No Tickets</section>}
                 {tickets.sort((first,second)=>{
-                    switch(props.sort){
+                    switch(sort){
                         case 'standard':
-                            return 0;
+                            return new Date(second.date)-new Date(first.date);
                         case 'owned':
                             if(first.owner===id && second.owner===id){
                                 return first.date-second.date;
@@ -32,7 +34,7 @@ function HelpList(props) {
                             return first.date-second.date
                         case 'assigned':
                             if(first.assigned===id && second.assigned===id){
-                                return first.date-second.date;
+                                return new Date(first.date)-new Date(second.date);
                             }else if(first.assigned===id){
                                 return 1
                             }else{

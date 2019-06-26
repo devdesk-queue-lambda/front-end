@@ -17,8 +17,12 @@ function Navigation(props) {
     const id=localStorage.getItem('userId')
     
     useEffect(()=>{
+        let temp=['/home','/register']
         if(auth===null && id){
             dispatch(load())
+        }
+        if(auth!==null && temp.includes(props.location.pathname)){
+            props.history.push('/list')
         }
     })
 
@@ -61,8 +65,9 @@ function Navigation(props) {
                             Home
                         </section>
                     </NavLink>
-                    <NavLink to={'/register'} activeClassName='active'><section>Register</section></NavLink>
-                    
+                    {!auth && 
+                        <NavLink to={'/register'} activeClassName='active'><section>Register</section></NavLink>
+                    }
                     {auth && 
                         <NavLink to={'/create-ticket'}>
                             <section>
@@ -85,6 +90,9 @@ function Navigation(props) {
                     <option value="standard">Entry</option>
                     <option value="owned">Your Tickets</option>
                     <option value="age">Eldest First</option>
+                    {(auth && auth!=='user')&&
+                        <option value="assigned">Assigned</option>
+                    }
                 </select>
             }
         </Header>
