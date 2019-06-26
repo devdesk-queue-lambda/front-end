@@ -93,11 +93,10 @@ export default (state=init,action)=>{
             }
         case FULL_LOAD:
             let currentAgain=action.users.filter(user=>Number(localStorage.getItem('userId'))===user.id)[0]
-            console.log(currentAgain);
             return {
                 ...state,
                 fetching:false,
-                cards:action.cards,
+                tickets:action.tickets,
                 users:action.users,
                 username:currentAgain.username,
                 authenticationType:currentAgain.authType,

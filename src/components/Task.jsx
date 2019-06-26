@@ -76,10 +76,10 @@ function Task(props) {
                         Assign Self
                     </InfoButton>
                 }{(authorizationType==='helper' && props.assigned===id)&& 
-                <InfoButton onClick={removeAssignment}>
-                    Remove Assignment
-                </InfoButton>
-            }
+                    <InfoButton onClick={removeAssignment}>
+                        Remove Assignment
+                    </InfoButton>
+                }
                 {(authorizationType==='mod' || authorizationType==='admin') && 
                     <select onChange={assignOther}>
                         <option value="">Assign Helper</option>
@@ -87,6 +87,10 @@ function Task(props) {
                             <option value={mod.id} key={mod.id}>{mod.username}</option>
                         ))}
                     </select>
+                }{props.owner===id &&
+                    <InfoButton onClick={edit}>
+                        Edit Ticket
+                    </InfoButton>
                 }
                 {(props.owner===id || (authorizationType==='helper' && props.assigned===id) || authorizationType==='admin') && 
                     <KillButton onClick={del}>

@@ -8,6 +8,7 @@ export const Card=styled.section`
   border-radius:10px;
 
   margin:.25rem auto;
+  position:relative;
 
   display:flex;
   flex-direction:column;
@@ -19,6 +20,7 @@ export const Card=styled.section`
   }
 
   width:100%;
+  max-height:275px;
   background-color:${props=>props.theme.pBgColor};
   ${v.TABLET}{
     max-width:350px;
@@ -34,13 +36,15 @@ export const Card=styled.section`
    height:3rem;
    display:flex;
    justify-content:space-between;
+   position: relative;
+   bottom:0;
    select{
       margin:.5rem;
    }
  `
 
  export const TypeDisp=styled.section`
-   ${v.FONT_STACK}
+   ${v.FONT_STACK};
    span{
       font-weight:bold;
       display:inline-block;
@@ -52,10 +56,13 @@ export const Card=styled.section`
    ${v.FONT_STACK};
    border-bottom:1px black solid;
    padding:.5rem;
+   height:75%;
  `
 
  export const Description=styled.section`
    margin:.5rem 0;
+   overflow:scroll;
+   height: 75%;
    span{
       font-weight:bold;
       text-align:left;
