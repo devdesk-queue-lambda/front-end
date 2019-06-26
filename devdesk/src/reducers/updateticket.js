@@ -1,4 +1,7 @@
-import { 
+import {
+  GET_TICKET_START,
+  GET_TICKET_SUCCESS,
+  GET_TICKET_FAIL,
   UPDATE_TICKET_START,
   UPDATE_TICKET_SUCCESS,
   UPDATE_TICKET_FAIL
@@ -19,30 +22,68 @@ const initialState = {
   isUpdatingTicket: false
 }
 
+export const getticket = (state = initialState, action) => {
+  switch(action.type) {
+    case GET_TICKET_START:
+      return {
+        ...state,
+        error: "",
+        isSubmittingTicket: true
+      }
+    case GET_TICKET_SUCCESS:
+      return {
+        ...state,
+        error             : false,
+        errorInfo         : {},
+        assigned          : action.payload.assigned,
+        id                : action.payload.id,
+        owner             : action.payload.owner,
+        ressolved         : action.payload.ressolved,
+        title             : action.payload.title,
+        description       : action.payload.description,
+        tried             : action.payload.tried,
+        type              : action.payload.type,
+        date              : action.payload.date,
+        isSubmittingTicket: false
+      }
+    case GET_TICKET_FAIL:
+      return {
+        ...state,
+        error: "",
+        isSubmittingTicket: false,
+      }
+    default:
+      return state;
+  }
+}
+
 export const updateticket = (state = initialState, action) => {
   switch(action.type) {
+    case GET_TICKET_START:
     case UPDATE_TICKET_START:
       return {
         ...state,
         error: "",
         isSubmittingTicket: true
       }
+    case GET_TICKET_SUCCESS:
     case UPDATE_TICKET_SUCCESS:
       return {
         ...state,
         error           : false,
         errorInfo       : {},
         assigned        : action.payload.assigned,
-        date            : action.paylost.date,
-        id              : action.paylost.id,
-        owner           : action.paylost.owner,
-        ressolved       : action.paylost.ressolved,
-        title           : action.paylost.title,
-        description     : action.paylost.description,
-        tried           : action.paylost.tried,
-        type            : action.paylost.type,
+        date            : action.payload.date,
+        id              : action.payload.id,
+        owner           : action.payload.owner,
+        ressolved       : action.payload.ressolved,
+        title           : action.payload.title,
+        description     : action.payload.description,
+        tried           : action.payload.tried,
+        type            : action.payload.type,
         isSubmittingTicket: false
       }
+    case GET_TICKET_FAIL:
     case UPDATE_TICKET_FAIL:
       return {
         ...state,

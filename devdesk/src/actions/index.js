@@ -136,12 +136,15 @@ export const UPDATE_TICKET_SUCCESS = "UPDATE_TICKET_SUCCESS";
 export const UPDATE_TICKET_FAIL    = "UPDATE_TICKET_FAIL";
 
 export const updateTicket = ticketInfo => dispatch => {
+  console.log('updateticket');
+  console.log('id',ticketInfo.id);
   dispatch({ type: UPDATE_TICKET_START });
   return axiosWithAuth().put(`${baseURL}/api/tickets/${ticketInfo.id}`, ticketInfo)
     .then(res => {
+      console.log('updateticket',res);
       dispatch({
         type: UPDATE_TICKET_SUCCESS,
-        payload: res.data.payload
+        payload: res.data
       });
       return true;
     })
