@@ -12,7 +12,7 @@ const Navigation = props => {
             <>
             <li><NavLink to="/user" >Home</NavLink></li>
             <li><NavLink to="/create-ticket" >New Ticket</NavLink></li>
-            <li><NavLink to="/edit-ticket/0" >Update Ticket</NavLink></li>
+            <li><NavLink to="/edit-ticket/32" >Update Ticket</NavLink></li>
             <li><NavLink to="/logout" >Logout</NavLink></li>
             </>
           )
