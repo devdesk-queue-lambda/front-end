@@ -1,4 +1,10 @@
 .App {
   display: flex;
   flex-flow: row nowrap;
+
+  @media screen and (max-width: 768px) {
+    & {
+      flex-direction: column;
+    }
+  }
 }

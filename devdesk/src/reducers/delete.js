@@ -1,37 +1,37 @@
 import { 
-  REGISTER_START,
-  REGISTER_SUCCESS,
-  REGISTER_FAIL
+  DELETE_START,
+  DELETE_SUCCESS,
+  DELETE_FAIL
 } from '../actions';
 
 const initialState = {
   error: false,
   errorInfo: {},
-  regMsg: "",
-  isRegistering: false
+  isDeleteing: false
 }
 
-export const register = (state = initialState, action) => {
+export const deleteticket = (state = initialState, action) => {
   switch(action.type) {
-    case REGISTER_START:
+    case DELETE_START:
       return {
         ...state,
         error: false,
-        isRegistering: true
+        errorInfo: {},
+        isDeleteing: true
       }
-    case REGISTER_SUCCESS:
+    case DELETE_SUCCESS:
       return {
         ...state,
         error: false,
-        regMsg: action.payload,
-        isRegistering: false
+        errorInfo: {},
+        isDeleteing: false
       }
-    case REGISTER_FAIL:
+    case DELETE_FAIL:
       return {
         ...state,
         error: true,
         errorInfo: action.payload,
-        isRegistering: false,
+        isDeleteing: false
       }
     default:
       return state;

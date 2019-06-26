@@ -2,18 +2,19 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 
-import { updateTicket } from '../actions';
+import { updateTicket, getTicket, resetTicketUpdated, deleteTicket } from '../actions';
 
 class UpdateTicket extends React.Component {
   state = {
-    title   : '',
-    desc    : '',
-    type    : '',
-    resolved: false,
-    tried   : '',
-    owner   : 1,
-    date    : '',
-    assigned: null
+    id         : this.props.id,
+    title      : this.props.title,
+    description: this.props.description,
+    type       : this.props.type,
+    ressolved  : this.props.ressolved,
+    tried      : this.props.tried,
+    owner      : this.props.owner,
+    date       : this.props.date,
+    assigned   : this.props.assigned
   }
 
   componentDidMount() {
@@ -28,6 +29,18 @@ class UpdateTicket extends React.Component {
         owner: this.props.userID
       })
     }
+    this.props.getTicket(this.props.match.params.id)
+      .then(res => this.setState({
+        id         : this.props.id,
+        title      : this.props.title,
+        description: this.props.description,
+        type       : this.props.type,
+        ressolved  : this.props.ressolved,
+        tried      : this.props.tried,
+        owner      : this.props.owner,
+        date       : this.props.date,
+        assigned   : this.props.assigned
+      }));
   }
 
   changeHandler = event => {
@@ -37,14 +50,35 @@ class UpdateTicket extends React.Component {
     })
   }
 
+  resetForm = event => {
+    event.preventDefault();
+    this.setState({
+      ...this.state,
+      id         : this.props.id,
+      title      : this.props.title,
+      description: this.props.description,
+      type       : this.props.type,
+      ressolved  : this.props.ressolved,
+      tried      : this.props.tried,
+      owner      : this.props.owner,
+      date       : this.props.date,
+      assigned   : this.props.assigned
+    })
+  }
+
+  deleteTicket = event => {
+    event.preventDefault();
+    this.props.deleteTicket(this.state.id)
+    .then(res => this.props.history.push("/user"));
+  }
+
   onSubmit = event => {
     event.preventDefault();
     this.setState({
       ...this.state,
       date: new Date()
     }, () => {
-      this.props.updateTicket(this.state)
-        .then(res => res && this.props.history.push("/user"));
+      this.props.updateTicket(this.state);
     })
   }
   
@@ -55,11 +89,11 @@ class UpdateTicket extends React.Component {
         <form onSubmit={this.onSubmit}>
           <div className="header">
             <label htmlFor="title">Title:</label>
-            <input type="text" name="title" onChange={this.changeHandler} id="title" />
+            <input value={this.state.title} type="text" name="title" onChange={this.changeHandler} id="title" />
           </div>
           <div className="cat">
             <label htmlFor="type">Category:
-            <select name="type" id="type" onChange={this.changeHandler}>
+            <select name="type" id="type" onChange={this.changeHandler} value={this.state.type}>
               <option value="">select category</option>
               <option value="login">login</option>
               <option value="grade">grade</option>
@@ -73,20 +107,36 @@ class UpdateTicket extends React.Component {
             </select></label>
           </div>
           <div className="textareas">
-            <label htmlFor="desc">Description of Problem:
-              <textarea type="text" name="desc" onChange={this.changeHandler} id="desc" placeholder="Explain problem here."></textarea>
+            <label htmlFor="description">Description of Problem:
+              <textarea value={this.state.description} type="text" name="description" onChange={this.changeHandler} id="description" placeholder="Explain problem here."></textarea>
             </label>
             <label className="tried">Things Tried:
-              <textarea type="text" name="tried" onChange={this.changeHandler} id="tried" data-key="0" placeholder="What have your tried?"></textarea>
+              <textarea value={this.state.tried} type="text" name="tried" onChange={this.changeHandler} id="tried" data-key="0" placeholder="What have your tried?"></textarea>
             </label>
           </div>
           <button type="submit">
-            {this.props.isRegistering ? (
+            {this.props.isUpdatingTicket ? (
               <Loader type="ThreeDots" color="#ffffff" height="12" width="26" />
             ) : (
               "Submit Ticket"
             )}
           </button>
+          <button onClick={this.resetForm} className="reset">Reset</button>
+          <button onClick={this.deleteTicket} className="delete">
+            {this.props.isDeleting ? (
+              <Loader type="ThreeDots" color="#ffffff" height="12" width="26" />
+            ) : (
+              "Delete"
+            )}
+          </button>
+          {this.props.ticketUpdated ?
+            (
+              setTimeout(() => {this.props.resetTicketUpdated()}, 3000),
+              <div className="success">Ticket Successfully Updated</div>
+            )
+            : this.props.error &&
+              <div className="error">Error: {`${this.props.errorInfo.status} : ${this.props.errorInfo.data.message}`}</div>
+          }
         </form>
       </main>
     );
@@ -94,8 +144,19 @@ class UpdateTicket extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  error: state.newTicket.error,
-  isSubmittingTicket: state.newTicket.isSubmittingTicket,
-  userID: state.login.userID
+  error           : state.updateticket.error,
+  errorInfo       : state.updateticket.errorInfo,
+  isUpdatingTicket: state.updateticket.isSubmittingTicket,
+  ticketUpdated   : state.updateticket.ticketUpdated,
+  assigned        : state.updateticket.assigned,
+  date            : state.updateticket.date,
+  id              : state.updateticket.id,
+  owner           : state.updateticket.owner,
+  ressolved       : state.updateticket.ressolved,
+  title           : state.updateticket.title,
+  description     : state.updateticket.description,
+  tried           : state.updateticket.tried,
+  type            : state.updateticket.type,
+  isDeleteing     : state.deleteticket.isDeleteing
 })
-export default connect(mapStateToProps, { submitTupdateTicketicket })(UpdateTicket);
+export default connect(mapStateToProps, { updateTicket, getTicket, resetTicketUpdated, deleteTicket })(UpdateTicket);

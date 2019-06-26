@@ -7,19 +7,22 @@ import Home from './components/Home';
 import Register from './components/Register';
 import UserHome from './components/UserHome';
 import NewTicket from './components/NewTicket';
+import UpdateTicket from './components/UpdateTicket';
 import Ticket from './components/Ticket';
+import Logout from './components/Logout';
 
 function App() {
-  let id = 0;
   return (
     <div className="App">
       <Navigation />
       
       <Route exact path="/" component={Home} />
-      <Route exact path="/register" component={Register} />
+      <Route path="/register" component={Register} />
+      <Route path="/logout" component={Logout} />
       <PrivateRoute path="/user" component={UserHome} />
       <PrivateRoute path="/create-ticket/" component={NewTicket} /> 
-      <PrivateRoute path={`/ticket/:id`} component={Ticket} />
+      <PrivateRoute path="/edit-ticket/:id" component={UpdateTicket} /> 
+      <PrivateRoute path="/ticket/:id" component={Ticket} />
     </div>
   );
 }
