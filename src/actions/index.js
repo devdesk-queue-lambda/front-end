@@ -23,16 +23,24 @@ export const CHANGE_SORT="CHANGE_SORT"
 export const FULL_LOAD='FULL_LOAD'
 
 export const removeTicket=e=>dispatch=>{
-    dispatch({type:FETCHING})
+    let axios=axiosWithAuth()
+    let res=axios.delete(`${baseURL}/api/tickets/${e}`)
+    res.then(data=>{
+      console.log(data);
+    }).catch(err=>{
+      console.error(err.response.data);
+      return {type:ERROR,payload:err.response.data.message}
+    })
     dispatch({type:DELETE_CARD,payload:e})
 }
 
 export const finishTicket=e=>dispatch=>{
     dispatch({type:FETCHING})
     let axios = axiosWithAuth()
-    let res=axios.put(`${baseURL}/api/tickets/${e.id}`,{...e,ressolved:!e.ressolved})
+    let temp={...e, ressolved:!e.ressolved}
+    let res=axios.put(`${baseURL}/api/tickets/${e.id}`,temp)
     res.then(data=>{
-      console.log(data);
+      dispatch({type:FLIP_TICKET,payload:temp})
     }).catch(err=>{
       console.log(err.response.data);
       dispatch({type:LOGIN_FAIL,payload:err.response.data.message})
@@ -41,13 +49,22 @@ export const finishTicket=e=>dispatch=>{
 
 export const assign=e=>dispatch=>{
     dispatch({type:FETCHING})
+    let temp={...e}
+    delete temp.history
+    delete temp.location
+    delete temp.match
+    delete temp.staticContext
+    
+    let axios=axiosWithAuth()
+    let res=axios.put(`${baseURL}/api/tickets/${e.id}`,temp)
+    res.then(data=>{
+      dispatch({type:ASSIGN,payload:temp})
+    }).catch(err=>{
+      dispatch({type:LOGIN_FAIL,payload:err.response.data.message})
+    })
     dispatch({type:ASSIGN,payload:e})
 }
 
-export const deAssign=e=>dispatch=>{
-    dispatch({type:FETCHING})
-    dispatch({type:ASSIGN,payload:e})
-}
 
 export const mods=e=>dispatch=>{
     dispatch({type:FETCHING})
@@ -68,14 +85,12 @@ export const getCard=e=>{
 export const alterPrivlidge=e=>dispatch=>{
   dispatch({type:FETCHING})
   let axios=axiosWithAuth()
-  console.log(`${baseURL}/api/users/${e.id}`);
   let req=axios.put(`${baseURL}/api/users/${e.id}`,{authType:e.authType})
   req.then(data=>{
     dispatch({type:ALTER_PRIVLIDGE,payload:e})
   }).catch(err=>{
     dispatch({type:LOGIN_FAIL,payload:err.response.data.message})
   })
-  // dispatch({type:ALTER_PRIVLIDGE,payload:e})
 }
 
 export const logout=e=>{
@@ -132,13 +147,12 @@ export const login = credentials => dispatch => {
   dispatch({ type: LOGIN_START });
   return axios.post(`${baseURL}/api/auth/login`, credentials)
     .then(res => {
-      console.log('SUCESS:',res);
       localStorage.setItem("token", res.data.token);
       localStorage.setItem('userId',res.data.id)
       dispatch({
         type: LOGIN_SUCCESS,
         payload: res.data
-      }, console.log('res',res));
+      });
       return true;
     })
     .catch(err => {

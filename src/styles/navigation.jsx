@@ -2,6 +2,8 @@ import styled from 'styled-components';
 import * as v from './vars'
 
 export const Navigate=styled.nav`
+    font-weight:
+    bold;font-size:1.25rem;
     span.menuHeader{
         display:inline-block;
         padding:1rem 0 1rem 1rem;
@@ -21,8 +23,8 @@ export const Navigate=styled.nav`
         transition:transform .5s;
         position:absolute;
         left:0;
-        background-color: ${props=>props.theme.bgAccent}
-        
+        background-color: ${props=>props.theme.pNavColor};
+        z-index:1;
         section{
             box-sizing:border-box;
             padding:1rem;
@@ -31,6 +33,12 @@ export const Navigate=styled.nav`
             color:white;
             text-decoration:none;
             cursor:pointer;
+            :hover{
+                background-color:${props=>props.theme.pNavHover}
+            }
+        }
+        a.active>section{
+            background-color:${props=>props.theme.pNavHover}
         }
         ${v.TABLET}{
             transform:translate(0);

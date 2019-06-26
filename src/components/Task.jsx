@@ -20,7 +20,12 @@ function Task(props) {
     }
 
     const finish=e=>{
-        dispatch(finishTicket({...props}))
+        let temp={...props}
+        delete temp.history
+        delete temp.location
+        delete temp.match
+        delete temp.staticContext
+        dispatch(finishTicket(temp))
     }
 
     const del=e=>{

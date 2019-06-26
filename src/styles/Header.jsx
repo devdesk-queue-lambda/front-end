@@ -9,7 +9,7 @@ export const Header=styled.header`
     left:0;
     width:100%;
     height:75px;
-    background-color:${props=>props.theme.bgAccent};
+    background-color:${props=>props.theme.pNavColor};
     color:${props=>props.theme.accent};
     text-align:left;
     padding-left:1rem;
@@ -17,7 +17,8 @@ export const Header=styled.header`
     justify-content:space-between;
     align-items:center;
     ${v.FONT_STACK};
-
+    z-index:1;
+    
     span{
         display:inline-block;
         padding:1rem;

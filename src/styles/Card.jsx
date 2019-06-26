@@ -6,6 +6,7 @@ export const Card=styled.section`
   box-shadow:2px 2px 2px black;
   border: 2px solid ${props=>props.theme.pBorderColor};
   border-radius:10px;
+  z-index:0;
 
   margin:.25rem auto;
   position:relative;
@@ -33,9 +34,9 @@ export const Card=styled.section`
 
  export const ButtonSection=styled.section`
    width:100%;
-   
    display:flex;
-   justify-content:space-between;
+   justify-content:space-evenly;
+   flex-wrap:wrap;
    position: relative;
    bottom:0;
    select{
@@ -61,8 +62,10 @@ export const Card=styled.section`
 
  export const Description=styled.section`
    margin:.5rem 0;
-   overflow:scroll;
+   overflow:auto;
    height: 65%;
+   max-width:350px;
+   word-wrap:break-word;
    span{
       font-weight:bold;
       text-align:left;

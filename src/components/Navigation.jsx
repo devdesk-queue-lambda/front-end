@@ -5,7 +5,7 @@ import cn from '../helpers/ClassReducer'
 import Lambda_Logo from '../imgs/Lambda_Logo.png';
 import {withRouter,NavLink} from 'react-router-dom'
 import {useSelector,useDispatch} from 'react-redux'
-import { sortChange,logout,mods } from '../actions';
+import { sortChange,logout,mods, load } from '../actions';
 
 function Navigation(props) {
     const dispatch=useDispatch()
@@ -13,10 +13,14 @@ function Navigation(props) {
     const [display,setDisplay]=useState(false)
     
     const sort=useSelector(state=>state.tickets.sort)
-    const auth=useSelector(state=>state.tickets.authenticationType)
-    const id=useSelector(state=>state.tickets.id)
+    const auth=useSelector(state=>state.tickets.authType)
+    const id=localStorage.getItem('userId')
     
-    
+    useEffect(()=>{
+        if(auth===null && id){
+            dispatch(load())
+        }
+    })
 
     const setSort=e=>{
         dispatch(sortChange(e.target.value))
@@ -44,7 +48,7 @@ function Navigation(props) {
                 </span>
                 {(auth && auth!=='user') &&
                 <section className={classlist}>
-                    <NavLink to="/users">
+                    <NavLink to="/users" activeClassName='active'>
                         <section>
                             Users
                         </section>
@@ -52,12 +56,12 @@ function Navigation(props) {
                 </section>
                 }
                 <section className={classlist}>
-                    <NavLink to="/">
+                    <NavLink to="/list" activeClassName='active' exact>
                         <section>
                             Home
                         </section>
                     </NavLink>
-                    <NavLink to={'/register'}><section>Register</section></NavLink>
+                    <NavLink to={'/register'} activeClassName='active'><section>Register</section></NavLink>
                     
                     {auth && 
                         <NavLink to={'/create-ticket'}>

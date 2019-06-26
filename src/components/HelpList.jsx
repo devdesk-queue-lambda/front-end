@@ -8,7 +8,7 @@ function HelpList(props) {
 
     const tickets=useSelector(state=>state.tickets.tickets)
     const id=Number(useSelector(state=>state.login.id))
-    const helpers=useSelector(state=>state.tickets.users.filter(user=>user.authenticationType!=='user'))
+    const helpers=useSelector(state=>state.tickets.users.filter(user=>user.authType!=='user'))
     const loading=useSelector(state=>state.tickets.fetching)
     const dispatch=useDispatch();
 

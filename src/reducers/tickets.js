@@ -9,7 +9,9 @@ const init={
     sort:'standard',
 
     fetching:false,
-    error:null
+    error:null,
+    username:'',
+    authType:null
 }
 
 export default (state=init,action)=>{
@@ -57,12 +59,14 @@ export default (state=init,action)=>{
         case FLIP_TICKET:
             return {
                 ...state,
-                tickets:state.tickets.map(ticket=>ticket.id===action.payload.id?action.payload:ticket)
+                tickets:state.tickets.map(ticket=>ticket.id===action.payload.id?action.payload:ticket),
+                fetching:false
             }
         case ASSIGN:
             return{
                 ...state,
-                tickets:state.tickets.map(ticket=>ticket.id===action.payload.id?action.payload:ticket)
+                tickets:state.tickets.map(ticket=>ticket.id===action.payload.id?action.payload:ticket),
+                fetching:false
             }
         //admin
         case LIST_MODS:
@@ -71,7 +75,7 @@ export default (state=init,action)=>{
                 ...state,
                 users:action.payload,
                 username:current.username,
-                authenticationType:current.authType,
+                authType:current.authType,
                 id:current.id
             }
         case ALTER_PRIVLIDGE:
@@ -90,7 +94,7 @@ export default (state=init,action)=>{
                 ...state,
                 userID:'',
                 username:'',
-                authenticationType:undefined,
+                authType:undefined,
                 tickets:[],
                 users:[]
             }
@@ -102,7 +106,7 @@ export default (state=init,action)=>{
                 tickets:action.tickets,
                 users:action.users,
                 username:currentAgain.username,
-                authenticationType:currentAgain.authType,
+                authType:currentAgain.authType,
                 id:currentAgain.id
             }
         default:

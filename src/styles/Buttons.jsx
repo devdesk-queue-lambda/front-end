@@ -5,10 +5,10 @@ const Button=styled.button`
     border:2px transparent solid;
     
     box-sizing:border-box;
-    margin:.5rem;
+    margin:.25rem;
 
     ${v.FONT_STACK};
-    padding:.5rem;
+    padding:.25rem;
     
     :hover{
         border:2px black inset;

@@ -27,13 +27,15 @@ const theme={
   accBorderColor:'transparent',
   alertBgAccent:'#3bb5e6',
   pAlertColor:'#bb1333',
-  pTextColor:'#bb1333'
+  pTextColor:'#bb1333',
+  pNavColor:'#14121f',
+  pNavHover:'#2f2c4b'
 }
 
 
 function App() {
   const single=useSelector(state=>state.tickets.viewed)
-  const auth=useSelector(state=>state.tickets.authenticationType)
+  const auth=useSelector(state=>state.tickets.authType)
   const loading=useSelector(state=>state.login.isLoggingIn)
   const fetching=useSelector(state=>state.tickets.fetching)
   const err=useSelector(state=>state.login.error)
