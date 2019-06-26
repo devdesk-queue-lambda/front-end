@@ -37,6 +37,9 @@ export const Navigate=styled.nav`
                 background-color:${props=>props.theme.pNavHover}
             }
         }
+        a{
+            text-decoration:none;
+        }
         a.active>section{
             background-color:${props=>props.theme.pNavHover}
         }
