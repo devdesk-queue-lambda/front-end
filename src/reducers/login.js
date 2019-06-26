@@ -1,37 +1,39 @@
 import { 
-  REGISTER_START,
-  REGISTER_SUCCESS,
-  REGISTER_FAIL
+  LOGIN_START,
+  LOGIN_SUCCESS,
+  LOGIN_FAIL
 } from '../actions';
 
 const initialState = {
   error: false,
   errorInfo: {},
-  regMsg: "",
-  isRegistering: false
+  userID: '',
+  isLoggingIn: false
 }
 
-export const register = (state = initialState, action) => {
+export const login = (state = initialState, action) => {
   switch(action.type) {
-    case REGISTER_START:
+    case LOGIN_START:
       return {
         ...state,
         error: false,
-        isRegistering: true
+        errorInfo: {},
+        isLoggingIn: true
       }
-    case REGISTER_SUCCESS:
+    case LOGIN_SUCCESS:
       return {
         ...state,
         error: false,
-        regMsg: action.payload,
-        isRegistering: false
+        errorInfo: {},
+        userID: action.payload.id,
+        isLoggingIn: false
       }
-    case REGISTER_FAIL:
+    case LOGIN_FAIL:
       return {
         ...state,
         error: true,
         errorInfo: action.payload,
-        isRegistering: false,
+        isLoggingIn: false
       }
     default:
       return state;

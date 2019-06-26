@@ -7,7 +7,7 @@ import {
 const initialState = {
   error: false,
   errorInfo: {},
-  regMsg: "",
+  userID: "",
   isRegistering: false
 }
 
@@ -23,7 +23,7 @@ export const register = (state = initialState, action) => {
       return {
         ...state,
         error: false,
-        regMsg: action.payload,
+        userID: action.payload.id,
         isRegistering: false
       }
     case REGISTER_FAIL:

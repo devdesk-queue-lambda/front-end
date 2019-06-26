@@ -50,28 +50,19 @@ main {
         }
       }
     }
-  }
 
-  .success {
-    margin-bottom: 10px;
-    padding: 10px;
-    background: #d8ffcf;
-    color: #15a11c;
-    text-align: center;
-    font-size: 0.875rem;
-    border: solid 1px #15a11c;
-    border-radius: 4px;
-  }
-
-  .error {
-    margin-bottom: 10px;
-    padding: 10px;
-    background: #ffd8d8;
-    color: #bf0000;
-    text-align: center;
-    font-size: 0.875rem;
-    border: solid 1px #bf0000;
-    border-radius: 4px;
+    &.home {
+      .error {
+        margin-bottom: 10px;
+        padding: 10px;
+        background: #ffd8d8;
+        color: #bf0000;
+        text-align: center;
+        font-size: 0.875rem;
+        border: solid 1px #bf0000;
+        border-radius: 4px;
+      }
+    }
   }
 
   &.new-ticket {
