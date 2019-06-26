@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 
-import { updateTicket, getTicket } from '../actions';
+import { updateTicket, getTicket, resetTicketUpdated } from '../actions';
 
 class UpdateTicket extends React.Component {
   state = {
@@ -52,18 +52,15 @@ class UpdateTicket extends React.Component {
 
   onSubmit = event => {
     event.preventDefault();
-    console.log('onsubmit', this.state);
     this.setState({
       ...this.state,
       date: new Date()
     }, () => {
-      console.log('submit ticket');
       this.props.updateTicket(this.state);
     })
   }
   
   render() {
-    console.log('render this.state',this.state);
     return (
       <main className="new-ticket">
         <h2>Create New Help Ticket</h2>
@@ -103,6 +100,14 @@ class UpdateTicket extends React.Component {
               "Submit Ticket"
             )}
           </button>
+          {this.props.ticketUpdated ?
+            (
+              setTimeout(() => {this.props.resetTicketUpdated()}, 3000),
+              <div className="success">Ticket Successfully Updated</div>
+            )
+            : this.props.error &&
+              <div className="error">Error: {`${this.props.errorInfo.status} : ${this.props.errorInfo.data.message}`}</div>
+          }
         </form>
       </main>
     );
@@ -111,7 +116,9 @@ class UpdateTicket extends React.Component {
 
 const mapStateToProps = state => ({
   error           : state.updateticket.error,
+  errorInfo       : state.updateticket.errorInfo,
   isUpdatingTicket: state.updateticket.isSubmittingTicket,
+  ticketUpdated   : state.updateticket.ticketUpdated,
   assigned        : state.updateticket.assigned,
   date            : state.updateticket.date,
   id              : state.updateticket.id,
@@ -122,4 +129,4 @@ const mapStateToProps = state => ({
   tried           : state.updateticket.tried,
   type            : state.updateticket.type
 })
-export default connect(mapStateToProps, { updateTicket, getTicket })(UpdateTicket);
+export default connect(mapStateToProps, { updateTicket, getTicket, resetTicketUpdated })(UpdateTicket);

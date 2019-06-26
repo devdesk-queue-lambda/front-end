@@ -1,7 +1,6 @@
 import axios from 'axios';
 import { axiosWithAuth } from '../utilities/axiosWithAuth';
 
-// const baseURL = "https://devdesk-backend-v2.herokuapp.com";
 const baseURL = "https://devdesk-backend.herokuapp.com";
 
 ////////////////
@@ -48,7 +47,6 @@ export const register = regInfo => dispatch => {
   dispatch({ type: REGISTER_START });
   return axios.post(`${baseURL}/api/auth/register`, regInfo)
     .then(res => {
-      console.log('register res',res);
       dispatch({
         type: REGISTER_SUCCESS,
         payload: res.data.message
@@ -78,7 +76,6 @@ export const getTicket = id => dispatch => {
   dispatch({ type: GET_TICKET_START });
   return axiosWithAuth().get(`${baseURL}/api/tickets/${id}`)
     .then(res => {
-      // console.log('get',res.data);
       dispatch({
         type: GET_TICKET_SUCCESS,
         payload: res.data
@@ -86,7 +83,6 @@ export const getTicket = id => dispatch => {
       return res.data;
     })
     .catch(err => {
-      console.log('ERROR:',err.response);
       dispatch({
         type: GET_TICKET_FAIL,
         payload: err.response
@@ -109,7 +105,6 @@ export const submitTicket = ticketInfo => dispatch => {
   dispatch({ type: SUBMIT_TICKET_START });
   return axiosWithAuth().post(`${baseURL}/api/tickets`, ticketInfo)
     .then(res => {
-      console.log(res.data);
       dispatch({
         type: SUBMIT_TICKET_SUCCESS,
         payload: res.data.payload
@@ -134,14 +129,16 @@ export const submitTicket = ticketInfo => dispatch => {
 export const UPDATE_TICKET_START   = "UPDATE_TICKET_START";
 export const UPDATE_TICKET_SUCCESS = "UPDATE_TICKET_SUCCESS";
 export const UPDATE_TICKET_FAIL    = "UPDATE_TICKET_FAIL";
+export const RESET_UPDATE_TICKET   = "RESET_UPDATE_TICKET";
+
+export const resetTicketUpdated = () => dispatch => {
+  dispatch({ type: RESET_UPDATE_TICKET });
+}
 
 export const updateTicket = ticketInfo => dispatch => {
-  console.log('updateticket');
-  console.log('id',ticketInfo.id);
   dispatch({ type: UPDATE_TICKET_START });
   return axiosWithAuth().put(`${baseURL}/api/tickets/${ticketInfo.id}`, ticketInfo)
     .then(res => {
-      console.log('updateticket',res);
       dispatch({
         type: UPDATE_TICKET_SUCCESS,
         payload: res.data
@@ -149,10 +146,9 @@ export const updateTicket = ticketInfo => dispatch => {
       return true;
     })
     .catch(err => {
-      console.log('ERROR:',err.response);
       dispatch({
         type: UPDATE_TICKET_FAIL,
-        payload: err.response.status
+        payload: err.response
       });
       return false;
     });
