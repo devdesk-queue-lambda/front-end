@@ -4,6 +4,7 @@ import { register } from './register';
 import { newTicket } from './newticket';
 import { getticket } from './getticket';
 import { updateticket } from './updateticket';
+import {deleteticket} from './delete';
 import tickets from './tickets'
 
 export default combineReducers({
@@ -12,5 +13,7 @@ export default combineReducers({
   newTicket,
   getticket,
   updateticket,
+  deleteticket,
+  
   tickets
 });

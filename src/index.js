@@ -9,7 +9,6 @@ import thunk from 'redux-thunk';
 import reducer from './reducers';
 import App from './App';
 import './scss/index.scss';
-import * as serviceWorker from './serviceWorker'
 
 const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
@@ -27,5 +26,3 @@ ReactDOM.render(
   </Provider>,
   document.getElementById('root')
 );
-
-serviceWorker.register()
