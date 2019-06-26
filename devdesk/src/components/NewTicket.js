@@ -38,7 +38,6 @@ class NewTicket extends React.Component {
   }
 
   onSubmit = event => {
-    console.log('submit');
     event.preventDefault();
     this.setState({
       ...this.state,
@@ -50,18 +49,17 @@ class NewTicket extends React.Component {
   }
   
   render() {
-    console.log('this.props.history',this.props.history);
     return (
       <main className="new-ticket">
         <h2>Create New Help Ticket</h2>
         <form onSubmit={this.onSubmit}>
           <div className="header">
             <label htmlFor="title">Title:</label>
-            <input type="text" name="title" onChange={this.changeHandler} id="title" required />
+            <input value={this.state.title} type="text" name="title" onChange={this.changeHandler} id="title" required />
           </div>
           <div className="cat">
             <label htmlFor="type">Category:
-            <select name="type" id="type" onChange={this.changeHandler} required>
+            <select name="type" id="type" onChange={this.changeHandler} value={this.state.type} required>
               <option value="">select category</option>
               <option value="login">login</option>
               <option value="grade">grade</option>
@@ -75,11 +73,11 @@ class NewTicket extends React.Component {
             </select></label>
           </div>
           <div className="textareas">
-            <label htmlFor="description">descriptionription of Problem:
-              <textarea type="text" name="description" onChange={this.changeHandler} id="description" placeholder="Explain problem here." required></textarea>
+            <label htmlFor="description">Description of Problem:
+              <textarea value={this.state.description} type="text" name="description" onChange={this.changeHandler} id="description" placeholder="Explain problem here." required></textarea>
             </label>
             <label className="tried">Things Tried:
-              <textarea type="text" name="tried" onChange={this.changeHandler} id="tried" data-key="0" placeholder="What have your tried?" required></textarea>
+              <textarea value={this.state.tried} type="text" name="tried" onChange={this.changeHandler} id="tried" data-key="0" placeholder="What have your tried?" required></textarea>
             </label>
           </div>
           <button type="submit">

@@ -7,10 +7,10 @@ import Home from './components/Home';
 import Register from './components/Register';
 import UserHome from './components/UserHome';
 import NewTicket from './components/NewTicket';
+import UpdateTicket from './components/UpdateTicket';
 import Ticket from './components/Ticket';
 
 function App() {
-  let id = 0;
   return (
     <div className="App">
       <Navigation />
@@ -19,7 +19,8 @@ function App() {
       <Route exact path="/register" component={Register} />
       <PrivateRoute path="/user" component={UserHome} />
       <PrivateRoute path="/create-ticket/" component={NewTicket} /> 
-      <PrivateRoute path={`/ticket/:id`} component={Ticket} />
+      <PrivateRoute path="/edit-ticket/:id" component={UpdateTicket} /> 
+      <PrivateRoute path="/ticket/:id" component={Ticket} />
     </div>
   );
 }
