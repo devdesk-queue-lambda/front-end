@@ -2,18 +2,18 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 
-import { updateTicket } from '../actions';
+import { updateTicket, getTicket } from '../actions';
 
 class UpdateTicket extends React.Component {
   state = {
-    title   : '',
-    desc    : '',
-    type    : '',
-    resolved: false,
-    tried   : '',
-    owner   : 1,
-    date    : '',
-    assigned: null
+    title      : this.props.title,
+    description: this.props.description,
+    type       : this.props.type,
+    ressolved  : this.props.ressolved,
+    tried      : this.props.tried,
+    owner      : this.props.owner,
+    date       : this.props.date,
+    assigned   : this.props.assigned
   }
 
   componentDidMount() {
@@ -28,6 +28,17 @@ class UpdateTicket extends React.Component {
         owner: this.props.userID
       })
     }
+    this.props.getTicket(this.props.match.params.id)
+      .then(res => this.setState({
+        title      : this.props.title,
+        description: this.props.description,
+        type       : this.props.type,
+        ressolved  : this.props.ressolved,
+        tried      : this.props.tried,
+        owner      : this.props.owner,
+        date       : this.props.date,
+        assigned   : this.props.assigned
+      }));
   }
 
   changeHandler = event => {
@@ -55,11 +66,11 @@ class UpdateTicket extends React.Component {
         <form onSubmit={this.onSubmit}>
           <div className="header">
             <label htmlFor="title">Title:</label>
-            <input type="text" name="title" onChange={this.changeHandler} id="title" />
+            <input value={this.state.title} type="text" name="title" onChange={this.changeHandler} id="title" />
           </div>
           <div className="cat">
             <label htmlFor="type">Category:
-            <select name="type" id="type" onChange={this.changeHandler}>
+            <select name="type" id="type" onChange={this.changeHandler} value={this.state.type}>
               <option value="">select category</option>
               <option value="login">login</option>
               <option value="grade">grade</option>
@@ -70,14 +81,15 @@ class UpdateTicket extends React.Component {
               <option value="financial-aid">financial-aid</option>
               <option value="student-support">student-support</option>
               <option value="general">general</option>
+              <option value="Test">Test</option>
             </select></label>
           </div>
           <div className="textareas">
-            <label htmlFor="desc">Description of Problem:
-              <textarea type="text" name="desc" onChange={this.changeHandler} id="desc" placeholder="Explain problem here."></textarea>
+            <label htmlFor="description">Description of Problem:
+              <textarea value={this.state.description} type="text" name="description" onChange={this.changeHandler} id="description" placeholder="Explain problem here."></textarea>
             </label>
             <label className="tried">Things Tried:
-              <textarea type="text" name="tried" onChange={this.changeHandler} id="tried" data-key="0" placeholder="What have your tried?"></textarea>
+              <textarea value={this.state.tried} type="text" name="tried" onChange={this.changeHandler} id="tried" data-key="0" placeholder="What have your tried?"></textarea>
             </label>
           </div>
           <button type="submit">
@@ -94,8 +106,17 @@ class UpdateTicket extends React.Component {
 }
 
 const mapStateToProps = state => ({
-  error: state.newTicket.error,
-  isSubmittingTicket: state.newTicket.isSubmittingTicket,
-  userID: state.login.userID
+  error           : state.getticket.error,
+  isUpdatingTicket: state.getticket.isSubmittingTicket,
+  userID          : state.getticket.userID,
+  assigned        : state.getticket.assigned,
+  date            : state.getticket.date,
+  id              : state.getticket.id,
+  owner           : state.getticket.owner,
+  ressolved       : state.getticket.ressolved,
+  title           : state.getticket.title,
+  description     : state.getticket.description,
+  tried           : state.getticket.tried,
+  type            : state.getticket.type
 })
-export default connect(mapStateToProps, { submitTupdateTicketicket })(UpdateTicket);
+export default connect(mapStateToProps, { updateTicket, getTicket })(UpdateTicket);

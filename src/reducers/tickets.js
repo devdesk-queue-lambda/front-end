@@ -77,7 +77,8 @@ export default (state=init,action)=>{
         case ALTER_PRIVLIDGE:
             return{
                 ...state,
-                users:state.users.map(user=>user.id===action.payload.id?action.payload:user)
+                users:state.users.map(user=>user.id===action.payload.id?{...user,authType:action.payload.authType}:user),
+                fetching:false
             }
         case CHANGE_SORT:
             return{
@@ -89,7 +90,9 @@ export default (state=init,action)=>{
                 ...state,
                 userID:'',
                 username:'',
-                authenticationType:null
+                authenticationType:undefined,
+                tickets:[],
+                users:[]
             }
         case FULL_LOAD:
             let currentAgain=action.users.filter(user=>Number(localStorage.getItem('userId'))===user.id)[0]

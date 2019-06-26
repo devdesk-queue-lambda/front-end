@@ -1,11 +1,11 @@
 export default{
     users:[
-        {username:"AshenPheonix",id:0,authorizationType:"admin"},
-        {username:"Dustin",id:1,authorizationType:"admin"},
-        {username:"Brandon Porter", id:2,authorizationType:'helper'},
-        {username:"Carlos Hernandez", id:3,authorizationType:'helper'},
-        {username:'OmarS',id:4,authorizationType:'user'},
-        {username:'Jonathan Erlich', id:5,authorizationType:'user'}
+        {username:"AshenPheonix",id:0,authType:"admin"},
+        {username:"Dustin",id:1,authType:"admin"},
+        {username:"Brandon Porter", id:2,authType:'helper'},
+        {username:"Carlos Hernandez", id:3,authType:'helper'},
+        {username:'OmarS',id:4,authType:'user'},
+        {username:'Jonathan Erlich', id:5,authType:'user'}
     ],
     tickets:[
         {id:0, type:'login', description: "Can't Login", owner:0, assigned:null},

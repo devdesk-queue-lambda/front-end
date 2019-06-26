@@ -20,7 +20,7 @@ export const Card=styled.section`
   }
 
   width:100%;
-  max-height:275px;
+  height: 300px;
   background-color:${props=>props.theme.pBgColor};
   ${v.TABLET}{
     max-width:350px;
@@ -33,7 +33,7 @@ export const Card=styled.section`
 
  export const ButtonSection=styled.section`
    width:100%;
-   height:3rem;
+   
    display:flex;
    justify-content:space-between;
    position: relative;
@@ -62,7 +62,7 @@ export const Card=styled.section`
  export const Description=styled.section`
    margin:.5rem 0;
    overflow:scroll;
-   height: 75%;
+   height: 65%;
    span{
       font-weight:bold;
       text-align:left;

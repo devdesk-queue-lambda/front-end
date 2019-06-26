@@ -10,9 +10,9 @@ function Task(props) {
 
     const dispatch=useDispatch()
 
-    const id=Number(useSelector(state=>state.login.id))
-    const authorizationType=useSelector(state=>state.login.authorizationType)
-    const mods=useSelector(state=>state.tickets.users.filter(user=>user.authorizationType!=='user'))
+    const id=Number(useSelector(state=>state.tickets.id))
+    const authType=useSelector(state=>state.tickets.authType)
+    const mods=useSelector(state=>state.tickets.users.filter(user=>user.authType!=='user'))
     const assigned=mods.filter(mod=>mod.id===props.assigned)[0]
 
     const edit=e=>{
@@ -61,7 +61,7 @@ function Task(props) {
                     <span>Description:</span><br/>
                     {props.description}
                 </Description>
-                {(props.owner===id || (authorizationType==='helper' && props.assigned===id)|| (props.id && authorizationType==='admin')) &&     
+                {(props.owner===id || (authType==='helper' && props.assigned===id)|| (props.id && authType==='admin')) &&     
                     <label htmlFor="done">Done: <input type="checkbox" name="done" checked={props.done} onChange={finish}/></label>
                 }
             </TicketDesc>
@@ -71,16 +71,16 @@ function Task(props) {
                         Edit Selection
                     </InfoButton>
                 }
-                {(authorizationType==='helper' && props.assigned===null)&& 
+                {(authType==='helper' && props.assigned===null)&& 
                     <InfoButton onClick={assignSelf}>
                         Assign Self
                     </InfoButton>
-                }{(authorizationType==='helper' && props.assigned===id)&& 
+                }{(authType==='helper' && props.assigned===id)&& 
                     <InfoButton onClick={removeAssignment}>
                         Remove Assignment
                     </InfoButton>
                 }
-                {(authorizationType==='mod' || authorizationType==='admin') && 
+                {(authType==='mod' || authType==='admin') && 
                     <select onChange={assignOther}>
                         <option value="">Assign Helper</option>
                         {mods.map(mod=>(
@@ -92,7 +92,7 @@ function Task(props) {
                         Edit Ticket
                     </InfoButton>
                 }
-                {(props.owner===id || (authorizationType==='helper' && props.assigned===id) || authorizationType==='admin') && 
+                {(props.owner===id || (authType==='helper' && props.assigned===id) || authType==='admin') && 
                     <KillButton onClick={del}>
                         Delete Selection
                     </KillButton>

@@ -29,7 +29,14 @@ export const removeTicket=e=>dispatch=>{
 
 export const finishTicket=e=>dispatch=>{
     dispatch({type:FETCHING})
-    dispatch({type:FLIP_TICKET,payload:{...e,done:!e.done}})
+    let axios = axiosWithAuth()
+    let res=axios.put(`${baseURL}/api/tickets/${e.id}`,{...e,ressolved:!e.ressolved})
+    res.then(data=>{
+      console.log(data);
+    }).catch(err=>{
+      console.log(err.response.data);
+      dispatch({type:LOGIN_FAIL,payload:err.response.data.message})
+    })
 }
 
 export const assign=e=>dispatch=>{
@@ -60,7 +67,15 @@ export const getCard=e=>{
 
 export const alterPrivlidge=e=>dispatch=>{
   dispatch({type:FETCHING})
-  dispatch({type:ALTER_PRIVLIDGE,payload:e})
+  let axios=axiosWithAuth()
+  console.log(`${baseURL}/api/users/${e.id}`);
+  let req=axios.put(`${baseURL}/api/users/${e.id}`,{authType:e.authType})
+  req.then(data=>{
+    dispatch({type:ALTER_PRIVLIDGE,payload:e})
+  }).catch(err=>{
+    dispatch({type:LOGIN_FAIL,payload:err.response.data.message})
+  })
+  // dispatch({type:ALTER_PRIVLIDGE,payload:e})
 }
 
 export const logout=e=>{
