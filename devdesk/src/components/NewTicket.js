@@ -37,6 +37,21 @@ class NewTicket extends React.Component {
     })
   }
 
+  resetForm = event => {
+    event.preventDefault();
+    this.setState({
+      ...this.state,
+      title      : '',
+      description: '',
+      type       : '',
+      ressolved  : false,
+      tried      : '',
+      owner      : 1,
+      assigned   : null,
+      date       : ''
+    })
+  }
+
   onSubmit = event => {
     event.preventDefault();
     this.setState({
@@ -87,6 +102,7 @@ class NewTicket extends React.Component {
               "Submit Ticket"
             )}
           </button>
+          <button onClick={this.resetForm} className="reset">Reset</button>
         </form>
       </main>
     );

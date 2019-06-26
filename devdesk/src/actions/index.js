@@ -153,3 +153,31 @@ export const updateTicket = ticketInfo => dispatch => {
       return false;
     });
 }
+
+////////////////////////
+//                    //
+//   DELETE TICKET    //
+//                    //
+////////////////////////
+
+export const DELETE_START   = "DELETE_START";
+export const DELETE_SUCCESS = "DELETE_SUCCESS";
+export const DELETE_FAIL    = "DELETE_FAIL";
+
+export const deleteTicket = id => dispatch => {
+  dispatch({ type: DELETE_START });
+  return axiosWithAuth().delete(`${baseURL}/api/tickets/${id}`)
+    .then(res => {
+      dispatch({
+        type: DELETE_SUCCESS
+      });
+      return true;
+    })
+    .catch(err => {
+      dispatch({
+        type: DELETE_FAIL,
+        payload: err.response
+      });
+      return false;
+    });
+}

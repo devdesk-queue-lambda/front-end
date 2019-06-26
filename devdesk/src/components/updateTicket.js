@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Loader from 'react-loader-spinner';
 
-import { updateTicket, getTicket, resetTicketUpdated } from '../actions';
+import { updateTicket, getTicket, resetTicketUpdated, deleteTicket } from '../actions';
 
 class UpdateTicket extends React.Component {
   state = {
@@ -50,6 +50,28 @@ class UpdateTicket extends React.Component {
     })
   }
 
+  resetForm = event => {
+    event.preventDefault();
+    this.setState({
+      ...this.state,
+      id         : this.props.id,
+      title      : this.props.title,
+      description: this.props.description,
+      type       : this.props.type,
+      ressolved  : this.props.ressolved,
+      tried      : this.props.tried,
+      owner      : this.props.owner,
+      date       : this.props.date,
+      assigned   : this.props.assigned
+    })
+  }
+
+  deleteTicket = event => {
+    event.preventDefault();
+    this.props.deleteTicket(this.state.id)
+    .then(res => this.props.history.push("/user"));
+  }
+
   onSubmit = event => {
     event.preventDefault();
     this.setState({
@@ -82,7 +104,6 @@ class UpdateTicket extends React.Component {
               <option value="financial-aid">financial-aid</option>
               <option value="student-support">student-support</option>
               <option value="general">general</option>
-              <option value="Test">Test</option>
             </select></label>
           </div>
           <div className="textareas">
@@ -98,6 +119,14 @@ class UpdateTicket extends React.Component {
               <Loader type="ThreeDots" color="#ffffff" height="12" width="26" />
             ) : (
               "Submit Ticket"
+            )}
+          </button>
+          <button onClick={this.resetForm} className="reset">Reset</button>
+          <button onClick={this.deleteTicket} className="delete">
+            {this.props.isDeleting ? (
+              <Loader type="ThreeDots" color="#ffffff" height="12" width="26" />
+            ) : (
+              "Delete"
             )}
           </button>
           {this.props.ticketUpdated ?
@@ -127,6 +156,7 @@ const mapStateToProps = state => ({
   title           : state.updateticket.title,
   description     : state.updateticket.description,
   tried           : state.updateticket.tried,
-  type            : state.updateticket.type
+  type            : state.updateticket.type,
+  isDeleteing     : state.deleteticket.isDeleteing
 })
-export default connect(mapStateToProps, { updateTicket, getTicket, resetTicketUpdated })(UpdateTicket);
+export default connect(mapStateToProps, { updateTicket, getTicket, resetTicketUpdated, deleteTicket })(UpdateTicket);
