@@ -17,7 +17,8 @@ function HelpList(props) {
 
     useEffect(()=>{
         if(error){
-            props.history.push('/')
+            localStorage.removeItem('token')
+            localStorage.removeItem('userId')
         }
         else if(updatedTicket){
             dispatch(getCards())
