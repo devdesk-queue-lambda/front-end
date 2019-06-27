@@ -11,6 +11,9 @@ export const List=styled.section`
     ${v.TABLET}{
         flex-direction:row;
         flex-wrap:wrap;
+        width: calc(100vw - 250px);
+        height:100vh;
+        overflow-y:auto;
         justify-content:center;
     }
     ${v.DESKTOP}{

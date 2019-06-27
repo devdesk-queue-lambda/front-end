@@ -39,7 +39,8 @@ export const Header=styled.header`
         }
     }
     ${v.TABLET}{
-        height:100vh;
+        min-height:100vh;
+        height:100%;
         width:250px;
         max-width:250px;
         flex-direction:column;
