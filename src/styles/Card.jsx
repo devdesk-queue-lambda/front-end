@@ -82,17 +82,10 @@ export const Card=styled.section`
       font-weight:bold;
       text-align:left;
       display:inline-block;
-<<<<<<< HEAD
-      margin-top:1rem;
-      padding:.5rem;
-      color:${props=>props.theme.infoAccent};
-      background-color:${props=>props.theme.alertBgAccent};
-=======
       padding: 0.5rem 0;
       color:${props=>props.theme.alertBgAccent};
    }
    ${v.DESKTOP} {
     height: 75%;
->>>>>>> df1600fb8d9652e1a6c3b35c2a4966b0d4dc34e9
    }
  `

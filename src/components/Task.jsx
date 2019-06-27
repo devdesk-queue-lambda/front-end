@@ -1,5 +1,5 @@
 import { Card, ButtonSection, TypeDisp, TicketDesc, Description } from '../styles/Card'
-import { InfoButton, KillButton } from "../styles/Buttons";
+import { InfoButton, KillButton,SuccessButton } from "../styles/Buttons";
 import {useDispatch,useSelector} from 'react-redux'
 import { removeTicket, finishTicket, assign, getCard } from '../actions'
 import {withRouter} from 'react-router-dom'
@@ -60,10 +60,11 @@ function Task(props) {
         <Card>
             <TicketDesc>
                 <TypeDisp onClick={viewOne}>
+                    {console.log(props)}
                     Topic: <span>{props.type}</span><br/>
                     Assigned: {props.assigned && assigned?assigned.username:"No One"}
                 </TypeDisp>
-                <Description onClick={viewOne}>
+                <Description>
                     <span>Description:</span><br/>
                     {props.description}
                     <br/>
@@ -73,6 +74,7 @@ function Task(props) {
                 {(props.owner===id || (authType==='helper' && props.assigned===id)|| (props.id && authType==='admin')) &&     
                     <label htmlFor="done">Done: <input type="checkbox" name="done" checked={props.done} onChange={finish}/></label>
                 }
+                <SuccessButton onClick={viewOne}>View Card Alone</SuccessButton>
             </TicketDesc>
             <ButtonSection>
                 {props.owner===id && 
