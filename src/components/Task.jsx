@@ -65,6 +65,9 @@ function Task(props) {
                 <Description onClick={viewOne}>
                     <span>Description:</span><br/>
                     {props.description}
+                    <br/>
+                    <span>Things Tried:</span><br/>
+                    {props.tried}
                 </Description>
                 {(props.owner===id || (authType==='helper' && props.assigned===id)|| (props.id && authType==='admin')) &&     
                     <label htmlFor="done">Done: <input type="checkbox" name="done" checked={props.done} onChange={finish}/></label>

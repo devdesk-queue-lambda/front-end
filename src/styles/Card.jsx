@@ -70,6 +70,7 @@ export const Card=styled.section`
       font-weight:bold;
       text-align:left;
       display:inline-block;
+      margin-top:1rem;
       padding:.5rem;
       color:${props=>props.theme.infoAccent};
       background-color:${props=>props.theme.alertBgAccent};

@@ -56,7 +56,7 @@ class NewTicket extends React.Component {
     event.preventDefault();
     this.setState({
       ...this.state,
-      date: new Date()
+      date: new Date().toISOString()
     }, () => {
       this.props.submitTicket(this.state)
         .then(res => res && this.props.history.push("/list"));
