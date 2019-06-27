@@ -5,7 +5,7 @@ import cn from '../helpers/ClassReducer'
 import Lambda_Logo from '../imgs/Lambda_Logo.png';
 import {withRouter,NavLink} from 'react-router-dom'
 import {useSelector,useDispatch} from 'react-redux'
-import { sortChange,logout,mods, load } from '../actions';
+import { sortChange,logout, load } from '../actions';
 
 function Navigation(props) {
     const dispatch=useDispatch()
@@ -50,7 +50,7 @@ function Navigation(props) {
                 <span className="menuHeader" onClick={show}>
                     <img src={Lambda_Logo} alt="Lambda Logo Mark" height="29" />DevDesk Queue
                 </span>
-                {(auth && auth!=='user') &&
+                {(auth && auth==='admin') &&
                 <section className={classlist}>
                     <NavLink to="/users" activeClassName='active'>
                         <section>
