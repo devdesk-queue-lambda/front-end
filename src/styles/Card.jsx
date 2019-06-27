@@ -3,7 +3,6 @@ import * as v from './vars'
 
 export const Card=styled.section`
   border: 1px solid ${props=>props.theme.pBorderColor};
-  border: 1px solid white;
   border-radius:6px;
   z-index:0;
 
