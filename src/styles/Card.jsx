@@ -23,8 +23,8 @@ export const Card=styled.section`
   background-color:${props=>props.theme.pBgColor};
   background: rgba(255,255,255,1);
   ${v.TABLET}{
-    max-width: calc(50% - 0.625rem);
-    margin:.25rem .25rem;
+    width: ${v.CARD_WIDTH};
+    max-width: ${v.CARD_WIDTH};
   }
   ${v.DESKTOP}{
     width: ${v.CARD_WIDTH};

@@ -26,7 +26,7 @@ export const removeTicket=e=>dispatch=>{
     let axios=axiosWithAuth()
     let res=axios.delete(`${baseURL}/api/tickets/${e}`)
     res.then(data=>{
-      console.log(data);
+      
     }).catch(err=>{
       console.error(err.response.data);
       return {type:ERROR,payload:err.response.data.message}

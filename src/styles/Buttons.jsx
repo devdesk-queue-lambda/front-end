@@ -9,6 +9,11 @@ const Button=styled.button`
 
     ${v.FONT_STACK};
     padding:.25rem;
+    :hover{
+      box-shadow:2px 2px 2px black inset;
+      border:2px black inset;
+      opacity:1;
+    }
 `
 
 export const SuccessButton=styled(Button)`
@@ -16,11 +21,6 @@ export const SuccessButton=styled(Button)`
     background-color:${props=>props.theme.bgAccent};
     transition:background-color linear .5s,color linear .5s;
     cursor:pointer;
-    :hover{
-      background-color:${props=>props.theme.accent};
-      color:${props=>props.theme.bgAccent};
-      border-color:${props=>props.theme.bgAccent};
-    }
 `
 
 export const KillButton=styled(Button)`
@@ -35,12 +35,6 @@ export const KillButton=styled(Button)`
     background: ${props=>props.theme.errBgAccent};
     border-color: ${props=>props.theme.errBgAccent};
     color: ${props=>props.theme.errAccent};
-
-    &:hover {
-      background: transparent;
-      border: solid 2px ${props=>props.theme.errBgAccent};
-      color: ${props=>props.theme.errBgAccent};
-    }
 
     ${v.DESKTOP} {
       padding: 8px 10px;
@@ -59,10 +53,6 @@ export const InfoButton=styled(Button)`
     opacity: 0.65;
     cursor: pointer;
     transition: all 0.25s linear;
-
-    &:hover {
-      opacity: 1;
-    }
 
     ${v.DESKTOP} {
       padding: 10px 14px;
