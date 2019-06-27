@@ -10,12 +10,17 @@ function HelpList(props) {
     const tickets=useSelector(state=>state.tickets.tickets)
     const id=Number(localStorage.getItem('userId'))
     const loading=useSelector(state=>state.tickets.fetching)
+    const error=useSelector(state=>state.tickets.error)
 
     const updatedTicket=useSelector(state=>state.updateticket.ticketUpdated)
     const newTicket=useSelector(state=>state.newTicket.newTicket)
 
     useEffect(()=>{
-        if(updatedTicket){
+        if(error){
+            localStorage.removeItem('token')
+            localStorage.removeItem('userId')
+        }
+        else if(updatedTicket){
             dispatch(getCards())
             dispatch(resetTicketUpdated())
         }else if(newTicket){

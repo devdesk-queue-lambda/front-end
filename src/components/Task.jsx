@@ -1,14 +1,16 @@
 import { Card, ButtonSection, TypeDisp, TicketDesc, Description } from '../styles/Card'
-import { InfoButton, KillButton } from "../styles/Buttons";
+import { InfoButton, KillButton,SuccessButton } from "../styles/Buttons";
 import {useDispatch,useSelector} from 'react-redux'
 import { removeTicket, finishTicket, assign, getCard } from '../actions'
 import {withRouter} from 'react-router-dom'
+import '../styles/styles.css';
 
-import React from 'react'
+import React,{useState} from 'react'
 
 function Task(props) {
 
     const dispatch=useDispatch()
+    const [shown,show]=useState(false)
 
     const id=Number(useSelector(state=>state.tickets.id))
     const authType=useSelector(state=>state.tickets.authType)
@@ -54,21 +56,26 @@ function Task(props) {
             assigned:null
         }))
     }
-    
+
     return (
-        <Card>
+        <Card className={shown && 'show'}>
             <TicketDesc>
                 <TypeDisp onClick={viewOne}>
+                    {console.log(props)}
                     Topic: <span>{props.type}</span><br/>
                     Assigned: {props.assigned && assigned?assigned.username:"No One"}
                 </TypeDisp>
-                <Description onClick={viewOne}>
+                <Description onClick={()=>show(!shown)}>
                     <span>Description:</span><br/>
                     {props.description}
+                    <br/>
+                    <span>Things Tried:</span><br/>
+                    {props.tried}
                 </Description>
                 {(props.owner===id || (authType==='helper' && props.assigned===id)|| (props.id && authType==='admin')) &&     
                     <label htmlFor="done">Done: <input type="checkbox" name="done" checked={props.done} onChange={finish}/></label>
                 }
+                <SuccessButton onClick={viewOne}>View Card Alone</SuccessButton>
             </TicketDesc>
             <ButtonSection>
                 {props.owner===id && 
@@ -85,13 +92,13 @@ function Task(props) {
                         Remove Assignment
                     </InfoButton>
                 }
-                {(authType==='mod' || authType==='admin') && 
-                    <select onChange={assignOther}>
-                        <option value="">Assign Helper</option>
-                        {mods.map(mod=>(
-                            <option value={mod.id} key={mod.id}>{mod.username}</option>
-                        ))}
-                    </select>
+                {(authType==='mod' || authType==='admin') &&
+                  <select onChange={assignOther}>
+                      <option value="">Assign Helper</option>
+                      {mods.map(mod=>(
+                          <option value={mod.id} key={mod.id}>{mod.username}</option>
+                      ))}
+                  </select>
                 }
                 {(props.owner===id || (authType==='helper' && props.assigned===id) || authType==='admin') && 
                     <KillButton onClick={del}>

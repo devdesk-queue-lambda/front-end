@@ -41,6 +41,7 @@ export const Header=styled.header`
     ${v.TABLET}{
         height:100vh;
         width:250px;
+        max-width:250px;
         flex-direction:column;
         justify-content:flex-start;
         flex-basis: 320px;

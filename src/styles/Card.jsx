@@ -2,33 +2,46 @@ import styled from 'styled-components';
 import * as v from './vars'
 
 export const Card=styled.section`
-  box-sizing:border-box;
-  box-shadow:2px 2px 2px black;
-  border: 2px solid ${props=>props.theme.pBorderColor};
-  border-radius:10px;
+  border: 1px solid ${props=>props.theme.pBorderColor};
+  border: 1px solid white;
+  border-radius:6px;
   z-index:0;
 
   margin:.25rem auto;
+  padding: 10px;
   position:relative;
 
-  display:flex;
-  flex-direction:column;
-  text-align:left;
-
   :hover{
-    border:2px black inset;
-    box-shadow:2px 2px 2px inset black;
+    border: 1px solid #ccc;
+    background: rgba(255,255,255,.5);
   }
 
   width:100%;
-  height: 300px;
+  min-width: 300px;
+  height: 400px;
+  box-sizing:border-box;
   background-color:${props=>props.theme.pBgColor};
+  background: rgba(255,255,255,1);
   ${v.TABLET}{
-    max-width:350px;
+    max-width: calc(50% - 0.625rem);
     margin:.25rem .25rem;
   }
   ${v.DESKTOP}{
-    width:500px;
+    width: ${v.CARD_WIDTH};
+    max-width: ${v.CARD_WIDTH};
+  }
+  ${v.XLDESKTOP} {
+    width: ${v.CARD_WIDTH};
+    max-width: ${v.CARD_WIDTH};
+  }
+
+  &.show{
+    box-sizing:border-box;
+    height:auto;
+    min-height:400px;
+    section{
+      height:auto;
+    }
   }
 `
 
@@ -36,7 +49,7 @@ export const Card=styled.section`
    width:100%;
    display:flex;
    justify-content:space-evenly;
-   flex-wrap:wrap;
+   flex-wrap: nowrap;
    position: relative;
    bottom:0;
    select{
@@ -45,33 +58,47 @@ export const Card=styled.section`
  `
 
  export const TypeDisp=styled.section`
+  width: 100%;
    ${v.FONT_STACK};
+   line-height: 1.5em;
    span{
+      margin-right: 30px;
       font-weight:bold;
       display:inline-block;
       margin-left:2rem;
+   }
+   ${v.TABLET} {
+     br { display: none; }
+     white-space: nowrap;
+     overflow: hidden;
+     text-overflow: ellipsis;
    }
  `
 
  export const TicketDesc=styled.section`
    ${v.FONT_STACK};
    border-bottom:1px black solid;
-   padding:.5rem;
-   height:75%;
+   margin-bottom: 6px;
+   padding-bottom: 10px;
+   height:85%;
  `
 
  export const Description=styled.section`
    margin:.5rem 0;
-   overflow:auto;
+   overflow: hidden;
+   text-overflow: ellipsis;
    height: 65%;
-   max-width:350px;
+   max-width:100%;
    word-wrap:break-word;
    span{
       font-weight:bold;
       text-align:left;
       display:inline-block;
-      padding:.5rem;
-      color:${props=>props.theme.infoAccent};
-      background-color:${props=>props.theme.alertBgAccent};
+      padding: 0.5rem 0;
+      color:${props=>props.theme.alertBgAccent};
+   }
+   
+   ${v.DESKTOP} {
+    height: 75%;
    }
  `

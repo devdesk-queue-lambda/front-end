@@ -19,7 +19,7 @@ import UpdateTicket from './components/updateTicket'
 const theme={
   bgAccent:'#2f2c4b',
   accent:'white',
-  errBgAccent:'#d84a5a',
+  errBgAccent:'#bb1333',
   errAccent:'white',
   infoBgAccent:'#1a61af',
   infoAccent:'white',
@@ -30,7 +30,8 @@ const theme={
   pAlertColor:'#bb1333',
   pTextColor:'#bb1333',
   pNavColor:'#14121f',
-  pNavHover:'#2f2c4b'
+  pNavHover:'#2f2c4b',
+  errAltColor:'#55596d'
 }
 
 
