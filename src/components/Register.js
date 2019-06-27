@@ -35,7 +35,6 @@ class Register extends React.Component {
           <label htmlFor="password">
             <input type="password" name="password" onChange={this.changeHandler} value={this.state.password} id="password" placeholder="Password" required />
           </label>
-          { console.log(this.props.regMsg) }
           {
             (this.props.regMsg !== '') && (
               <div className="success">{ this.props.regMsg }</div>
