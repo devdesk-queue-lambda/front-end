@@ -18,21 +18,30 @@ export const Card=styled.section`
 
   width:100%;
   min-width: 300px;
-  height: 360px;
+  height: 400px;
+  box-sizing:border-box;
   background-color:${props=>props.theme.pBgColor};
   background: rgba(255,255,255,1);
-  .show{
-     height:auto;
-   }
   ${v.TABLET}{
     max-width: calc(50% - 0.625rem);
     margin:.25rem .25rem;
   }
   ${v.DESKTOP}{
-    width: calc(50% - 0.625rem);
+    width: ${v.CARD_WIDTH};
+    max-width: ${v.CARD_WIDTH};
   }
   ${v.XLDESKTOP} {
-    width: calc(33% - 0.625rem);
+    width: ${v.CARD_WIDTH};
+    max-width: ${v.CARD_WIDTH};
+  }
+
+  &.show{
+    box-sizing:border-box;
+    height:auto;
+    min-height:400px;
+    section{
+      height:auto;
+    }
   }
 `
 

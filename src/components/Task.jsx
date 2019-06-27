@@ -58,14 +58,14 @@ function Task(props) {
     }
 
     return (
-        <Card>
+        <Card className={shown && 'show'}>
             <TicketDesc>
                 <TypeDisp onClick={viewOne}>
                     {console.log(props)}
                     Topic: <span>{props.type}</span><br/>
                     Assigned: {props.assigned && assigned?assigned.username:"No One"}
                 </TypeDisp>
-                <Description className={shown && 'show'}>
+                <Description onClick={()=>show(!shown)}>
                     <span>Description:</span><br/>
                     {props.description}
                     <br/>

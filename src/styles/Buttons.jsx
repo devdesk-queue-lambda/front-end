@@ -14,25 +14,32 @@ const Button=styled.button`
 export const SuccessButton=styled(Button)`
     color:${props=>props.theme.accent};
     background-color:${props=>props.theme.bgAccent};
+    transition:background-color linear .5s,color linear .5s;
+    cursor:pointer;
+    :hover{
+      background-color:${props=>props.theme.accent};
+      color:${props=>props.theme.bgAccent};
+      border-color:${props=>props.theme.bgAccent};
+    }
 `
 
 export const KillButton=styled(Button)`
     color:${props=>props.theme.errAccent};
     background-color:${props=>props.theme.errBgAccent};
     padding: 8px 4px;
-    background: transparent;
     font-weight: bold;
     font-size: 0.75rem;
-    color: #55596d;
-    border: solid 2px #55596d;
     opacity: 0.65;
     cursor: pointer;
     transition: all 0.25s linear;
+    background: ${props=>props.theme.errBgAccent};
+    border-color: ${props=>props.theme.errBgAccent};
+    color: ${props=>props.theme.errAccent};
 
     &:hover {
-      background: #bb1333;
-      color: #fff;
-      border-color: #bb1333;
+      background: transparent;
+      border: solid 2px ${props=>props.theme.errBgAccent};
+      color: ${props=>props.theme.errBgAccent};
     }
 
     ${v.DESKTOP} {
