@@ -4,7 +4,7 @@ import PrivateRoute from './utilities/PrivateRoute';
 import NewTicket from './components/NewTicket';
 
 import { Route } from 'react-router-dom';
-import {Wrapper} from './styles/App'
+import {Wrapper,SingleWrapper} from './styles/App'
 
 import Navigation from './components/Navigation';
 import Home from './components/Home';
@@ -74,7 +74,7 @@ function App() {
         }}/>
         <Route path={`/ticket/:id`} render={props=>{ 
           aquire(props.match.params.id)
-          return <Ticket {...single} />
+          return <SingleWrapper><Ticket {...single} /></SingleWrapper>
         }}/> 
         <PrivateRoute path="/create-ticket/" component={NewTicket} /> 
         <PrivateRoute path='/list' component={HelpList}/>
