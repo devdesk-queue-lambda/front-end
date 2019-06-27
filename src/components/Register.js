@@ -20,8 +20,8 @@ class Register extends React.Component {
 
   onSubmit = event => {
     event.preventDefault();
-    this.props.register(this.state);
-      //.then(res => res && this.props.history.push("/user"));
+    this.props.register(this.state)
+      .then(res => res && setTimeout(() => { this.props.history.push("/") }, 1500));
   }
 
   render() {
@@ -35,6 +35,17 @@ class Register extends React.Component {
           <label htmlFor="password">
             <input type="password" name="password" onChange={this.changeHandler} value={this.state.password} id="password" placeholder="Password" required />
           </label>
+          { console.log(this.props.regMsg) }
+          {
+            (this.props.regMsg !== '') && (
+              <div className="success">{ this.props.regMsg }</div>
+            )
+          }
+          {
+            (this.props.error) && (
+            <div className="error">{ this.props.errorInfo.data.message }</div>
+            )
+          }
           <button>
             {this.props.isRegistering ? (
               <Loader type="ThreeDots" color="#ffffff" height="12" width="26" />
@@ -50,8 +61,10 @@ class Register extends React.Component {
 
 
 const mapStateToProps = state => ({
-  error: state.register.error,
-  isRegistering: state.register.isRegistering
+  error        : state.register.error,
+  errorInfo    : state.register.errorInfo,
+  isRegistering: state.register.isRegistering,
+  regMsg       : state.register.regMsg
 })
 
 export default connect(mapStateToProps, { register })(Register);

@@ -48,6 +48,7 @@ export const Navigate=styled.nav`
             transition:0;
             position:static;
             width:250px;
+            max-width: 250px;
             box-sizing:border-box;
 
 

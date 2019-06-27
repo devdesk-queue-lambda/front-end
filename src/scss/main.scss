@@ -65,7 +65,45 @@ main {
     }
   }
 
+  .contain {
+    width:100%;
+    max-width: 1000px;
+    padding: 20px;
+    background-color: #f0f4f7;
+    margin:.25rem 0;
+    position:relative;
+    border: 2px solid black;
+    border-radius:10px;
+    box-shadow:2px 2px 2px black;
+  }
+
+  .success {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #d8ffcf;
+    color: #15a11c;
+    text-align: center;
+    font-size: 0.875rem;
+    border: solid 1px #15a11c;
+    border-radius: 4px;
+  }
+
+  .error {
+    margin-bottom: 10px;
+    padding: 10px;
+    background: #ffd8d8;
+    color: #bf0000;
+    text-align: center;
+    font-size: 0.875rem;
+    border: solid 1px #bf0000;
+    border-radius: 4px;
+  }
+
   &.new-ticket {
+
+    h2 {
+      margin-top: 0;
+    }
 
     form {
       max-width: 1000px;
@@ -156,22 +194,63 @@ main {
       #description {
         width: calc(100% - 1rem);
       }
+
+
+      @media screen and (min-width:768px) {
+        & {
+          flex-flow: column nowrap;
+        }
+
+        #description {
+          width: 100%;
+        }
+      }
     }
 
     button {
       margin: 20px auto;
-      padding: 10px 20px;
-      background: #007bff;
+      padding: 8px 18px;
+      background: #1a61af;
       font-weight: bold;
       font-size: 1rem;
       color: #fff;
-      border: none;
+      border: solid 2px #1a61af;;
       opacity: 0.65;
       cursor: pointer;
       transition: all 0.25s linear;
 
       &:hover {
         opacity: 1;
+        border:2px black inset;
+        box-shadow:2px 2px 2px inset black;
+      }
+
+      &.reset {
+        margin-left: 10px;
+        padding: 8px 18px;
+        color: #777;
+        background: transparent;
+        border: solid 2px #777;
+        transition: all 0.25s linear;
+
+        &:hover {
+          background: #777;
+          color: #fff;
+        }
+      }
+
+      &.delete {
+        margin-left: 10px;
+        padding: 8px 18px;
+        color: #fff;
+        background: #d84a5a;
+        border: solid 2px #d84a5a;
+        transition: all 0.25s linear;
+
+        &:hover {
+          background: #d84a5a;
+          color: #fff;
+        }
       }
     }
   }
