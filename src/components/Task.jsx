@@ -5,11 +5,12 @@ import { removeTicket, finishTicket, assign, getCard } from '../actions'
 import {withRouter} from 'react-router-dom'
 import '../styles/styles.css';
 
-import React from 'react'
+import React,{useState} from 'react'
 
 function Task(props) {
 
     const dispatch=useDispatch()
+    const [shown,show]=useState(false)
 
     const id=Number(useSelector(state=>state.tickets.id))
     const authType=useSelector(state=>state.tickets.authType)
@@ -64,7 +65,7 @@ function Task(props) {
                     Topic: <span>{props.type}</span><br/>
                     Assigned: {props.assigned && assigned?assigned.username:"No One"}
                 </TypeDisp>
-                <Description>
+                <Description className={shown && 'show'}>
                     <span>Description:</span><br/>
                     {props.description}
                     <br/>

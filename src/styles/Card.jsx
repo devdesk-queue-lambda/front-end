@@ -21,6 +21,9 @@ export const Card=styled.section`
   height: 360px;
   background-color:${props=>props.theme.pBgColor};
   background: rgba(255,255,255,1);
+  .show{
+     height:auto;
+   }
   ${v.TABLET}{
     max-width: calc(50% - 0.625rem);
     margin:.25rem .25rem;
@@ -85,6 +88,7 @@ export const Card=styled.section`
       padding: 0.5rem 0;
       color:${props=>props.theme.alertBgAccent};
    }
+   
    ${v.DESKTOP} {
     height: 75%;
    }
