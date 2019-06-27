@@ -3,6 +3,7 @@ import { InfoButton, KillButton } from "../styles/Buttons";
 import {useDispatch,useSelector} from 'react-redux'
 import { removeTicket, finishTicket, assign, getCard } from '../actions'
 import {withRouter} from 'react-router-dom'
+import '../styles/styles.css';
 
 import React from 'react'
 
@@ -54,7 +55,7 @@ function Task(props) {
             assigned:null
         }))
     }
-    
+
     return (
         <Card>
             <TicketDesc>
@@ -88,13 +89,13 @@ function Task(props) {
                         Remove Assignment
                     </InfoButton>
                 }
-                {(authType==='mod' || authType==='admin') && 
-                    <select onChange={assignOther}>
-                        <option value="">Assign Helper</option>
-                        {mods.map(mod=>(
-                            <option value={mod.id} key={mod.id}>{mod.username}</option>
-                        ))}
-                    </select>
+                {(authType==='mod' || authType==='admin') &&
+                  <select onChange={assignOther}>
+                      <option value="">Assign Helper</option>
+                      {mods.map(mod=>(
+                          <option value={mod.id} key={mod.id}>{mod.username}</option>
+                      ))}
+                  </select>
                 }
                 {(props.owner===id || (authType==='helper' && props.assigned===id) || authType==='admin') && 
                     <KillButton onClick={del}>
