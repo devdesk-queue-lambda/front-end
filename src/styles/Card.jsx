@@ -39,6 +39,7 @@ export const Card=styled.section`
     box-sizing:border-box;
     height:auto;
     min-height:400px;
+    max-height:100%;
     section{
       height:auto;
     }

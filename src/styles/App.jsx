@@ -7,3 +7,14 @@ export const Wrapper=styled.div`
         display:flex;
     }
 `
+
+export const SingleWrapper=styled.div`
+    ${v.TABLET}{
+        display:flex;
+        justify-content:center;
+        align-content:center;
+        height:100%;
+        width:calc( 100vw - 250px);
+        padding-top:2rem;
+    }
+`
