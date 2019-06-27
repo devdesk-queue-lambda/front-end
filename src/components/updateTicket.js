@@ -74,71 +74,67 @@ class UpdateTicket extends React.Component {
 
   onSubmit = event => {
     event.preventDefault();
-    this.setState({
-      ...this.state,
-      date: new Date(),
-      id:this.props.match.params.id
-    }, () => {
-      this.props.updateTicket(this.state);
-    })
+    this.props.updateTicket(this.state);
   }
   
   render() {
     return (
       <main className="new-ticket">
-        <h2>Create New Help Ticket</h2>
-        <form onSubmit={this.onSubmit}>
-          <div className="header">
-            <label htmlFor="title">Title:</label>
-            <input value={this.state.title} type="text" name="title" onChange={this.changeHandler} id="title" />
-          </div>
-          <div className="cat">
-            <label htmlFor="type">Category:
-            <select name="type" id="type" onChange={this.changeHandler} value={this.state.type}>
-              <option value="">select category</option>
-              <option value="login">login</option>
-              <option value="grade">grade</option>
-              <option value="javascript">javascript</option>
-              <option value="HTML/CSS">HTML/CSS</option>
-              <option value="react">react</option>
-              <option value="redux">redux</option>
-              <option value="financial-aid">financial-aid</option>
-              <option value="student-support">student-support</option>
-              <option value="general">general</option>
-            </select></label>
-          </div>
-          <div className="textareas">
-            <label htmlFor="description">Description of Problem:
-              <textarea value={this.state.description} type="text" name="description" onChange={this.changeHandler} id="description" placeholder="Explain problem here."></textarea>
-            </label>
-            <label className="tried">Things Tried:
-              <textarea value={this.state.tried} type="text" name="tried" onChange={this.changeHandler} id="tried" data-key="0" placeholder="What have your tried?"></textarea>
-            </label>
-          </div>
-          <button type="submit">
-            {this.props.isUpdatingTicket ? (
-              <Loader type="ThreeDots" color="#ffffff" height="12" width="26" />
-            ) : (
-              "Submit Ticket"
-            )}
-          </button>
-          <button onClick={this.resetForm} className="reset">Reset</button>
-          <button onClick={this.deleteTicket} className="delete">
-            {this.props.isDeleting ? (
-              <Loader type="ThreeDots" color="#ffffff" height="12" width="26" />
-            ) : (
-              "Delete"
-            )}
-          </button>
-          {this.props.ticketUpdated ?
-            (
-              setTimeout(() => {this.props.resetTicketUpdated()}, 3000),
-              <div className="success">Ticket Successfully Updated</div>
-            )
-            : this.props.error &&
-              <div className="error">Error: {`${this.props.errorInfo.status} : ${this.props.errorInfo.data.message}`}</div>
-          }
-        </form>
+        <div className="contain">
+          <h2>Create New Help Ticket</h2>
+          <form onSubmit={this.onSubmit}>
+            <div className="header">
+              <label htmlFor="title">Title:</label>
+              <input value={this.state.title} type="text" name="title" onChange={this.changeHandler} id="title" />
+            </div>
+            <div className="cat">
+              <label htmlFor="type">Category:
+              <select name="type" id="type" onChange={this.changeHandler} value={this.state.type}>
+                <option value="">select category</option>
+                <option value="login">login</option>
+                <option value="grade">grade</option>
+                <option value="javascript">javascript</option>
+                <option value="HTML/CSS">HTML/CSS</option>
+                <option value="react">react</option>
+                <option value="redux">redux</option>
+                <option value="financial-aid">financial-aid</option>
+                <option value="student-support">student-support</option>
+                <option value="general">general</option>
+              </select></label>
+            </div>
+            <div className="textareas">
+              <label htmlFor="description">Description of Problem:
+                <textarea value={this.state.description} type="text" name="description" onChange={this.changeHandler} id="description" placeholder="Explain problem here."></textarea>
+              </label>
+              <label className="tried">Things Tried:
+                <textarea value={this.state.tried} type="text" name="tried" onChange={this.changeHandler} id="tried" data-key="0" placeholder="What have your tried?"></textarea>
+              </label>
+            </div>
+            <button type="submit">
+              {this.props.isUpdatingTicket ? (
+                <Loader type="ThreeDots" color="#ffffff" height="12" width="26" />
+              ) : (
+                "Submit Ticket"
+              )}
+            </button>
+            <button onClick={this.resetForm} className="reset">Reset</button>
+            <button onClick={this.deleteTicket} className="delete">
+              {this.props.isDeleting ? (
+                <Loader type="ThreeDots" color="#ffffff" height="12" width="26" />
+              ) : (
+                "Delete"
+              )}
+            </button>
+            {this.props.ticketUpdated ?
+              (
+                setTimeout(() => {this.props.resetTicketUpdated()}, 3000),
+                <div className="success">Ticket Successfully Updated</div>
+              )
+              : this.props.error &&
+                <div className="error">Error: {`${this.props.errorInfo.status} : ${this.props.errorInfo.data.message}`}</div>
+            }
+          </form>
+        </div>
       </main>
     );
   }

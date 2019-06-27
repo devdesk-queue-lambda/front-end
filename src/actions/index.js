@@ -159,7 +159,6 @@ export const login = credentials => dispatch => {
       return true;
     })
     .catch(err => {
-      console.log('ERROR:',err.response);
       dispatch({
         type: LOGIN_FAIL,
         payload: err.response.status
@@ -183,15 +182,16 @@ export const register = regInfo => dispatch => {
   return axios.post(`${baseURL}/api/auth/register`, regInfo)
     .then(res => {
       dispatch({
-        type: REGISTER_SUCCESS
+        type: REGISTER_SUCCESS,
+        payload: res.data.message
       });
-      login({...regInfo})
+      dispatch(login({username: regInfo.username, password: regInfo.password}));
+      return true
     })
     .catch(err => {
-      console.log('ERROR:',err.response);
       dispatch({
         type: REGISTER_FAIL,
-        payload: err.response.status
+        payload: err.response
       });
       return false;
     });
