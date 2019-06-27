@@ -20,8 +20,8 @@ class Register extends React.Component {
 
   onSubmit = event => {
     event.preventDefault();
-    this.props.register(this.state);
-      //.then(res => res && this.props.history.push("/user"));
+    this.props.register(this.state)
+    // .then(res => res && this.props.history.push("/"));
   }
 
   render() {
