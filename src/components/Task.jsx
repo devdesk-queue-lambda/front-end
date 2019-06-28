@@ -1,9 +1,10 @@
 import { Card, ButtonSection, TypeDisp, TicketDesc, Description } from '../styles/Card'
-import { InfoButton, KillButton,SuccessButton } from "../styles/Buttons";
+import { InfoButton, KillButton,SuccessButton, Sel } from "../styles/Buttons";
 import {useDispatch,useSelector} from 'react-redux'
 import { removeTicket, finishTicket, assign, getCard } from '../actions'
 import {withRouter} from 'react-router-dom'
 import '../styles/styles.css';
+import {FaCaretUp, FaCaretDown} from 'react-icons/fa'
 
 import React,{useState} from 'react'
 
@@ -16,6 +17,8 @@ function Task(props) {
     const authType=useSelector(state=>state.tickets.authType)
     const mods=useSelector(state=>state.tickets.users.filter(user=>user.authType!=='user'))
     const assigned=mods.filter(mod=>mod.id===props.assigned)[0]
+
+    const [display,setDisp]=useState(false)
 
     const edit=e=>{
         props.history.push(`/edit-ticket/${props.id}`)
@@ -93,12 +96,16 @@ function Task(props) {
                     </InfoButton>
                 }
                 {(authType==='mod' || authType==='admin') &&
-                  <select onChange={assignOther}>
-                      <option value="">Assign Helper</option>
-                      {mods.map(mod=>(
-                          <option value={mod.id} key={mod.id}>{mod.username}</option>
-                      ))}
-                  </select>
+                  <Sel>
+                      <select onChange={assignOther} onClick={()=>{setDisp(!display)}}>
+                        <option value="">Assign Helper</option>
+                        {mods.map(mod=>(
+                            <option value={mod.id} key={mod.id}>{mod.username}</option>
+                        ))}
+                      </select>
+                      {!display && <FaCaretDown/>}
+                      {display && <FaCaretUp/>}
+                  </Sel>
                 }
                 {(props.owner===id || (authType==='helper' && props.assigned===id) || authType==='admin') && 
                     <KillButton onClick={del}>

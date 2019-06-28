@@ -58,3 +58,23 @@ export const InfoButton=styled(Button)`
       padding: 10px 14px;
     }
 `
+
+export const Sel=styled.section`
+  ${v.FONT_STACK};
+  display:flex;
+  align-items:center;
+  position:relative;
+  select{
+    box-sizing:border-box;
+    ${v.FONT_STACK};
+    border:1px solid black;
+    margin-right:0;
+    padding:.5rem;
+    padding-right:1rem;
+  }
+  svg{
+    box-sizing:border-box;
+    position:absolute;
+    right:0;
+  }
+`
